@@ -31,48 +31,63 @@ modulo consultorio:
 			
 ////============================================================FUNCIONES Y ESTRUCTURAS============================================================
 
-struct administrador
+struct Usuarios
 {
-	char apenom[100];
-	char contra[100];
+	char usuario[10];
+	char contra[10];
+	char Apenom[60];
 	//bool borrado=false; // siempre vamos a agregar el campo borrado porque a este campo lo vamos a utilizar para hacer borrados logicos
     			            // el borrado logico es como cuando se borra un archivo y se va la papelera, el borrado fisico es cuando ya se borra lo que hay en la papelera xd
 };
 
-struct paciente
+struct fecha
 {
-	char nombre[100];
-	char apellido[100];
-	int dni;
+	int dia;
+	int mes;
+	int year;
+};
+
+struct Mascota
+{
+	char Apenom[60];
+	char domicilio[60];
+	int Dni_due;
 	char localidad[100];
-	int edad;
-	float peso;
+	fecha FechaNac;
+	char telefono[25];
 };
 
 struct veterinarios
 {
-	char nombre[100];
-	char apellido[100];
-	char usuario[100];
-	char contra[100];
+	char Apenom[60];
+	int Matricula;
+	int Dni;
+	char telefono[25];
 };
 
-void administracion(administrador admi,FILE*altaveterinarios,veterinarios altav);
-void recepcionista(paciente mascota);
+struct turnos
+{
+	int Matriculavet;
+	fecha fechaturno;
+	int Dni_due;
+	char evolucion[380];
+};
+
+void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav);
+void recepcionista(Mascota masc);
 //void atencionvet();
-void regvet(FILE*altaveterinarios,veterinarios altav); 
+void regvet(FILE*altaveterinarios,Usuarios admi); 
 //============================================================PRINCIPAL============================================================
 main()
 {
 	int opcion	;
-	administrador admi;
-	paciente mascota;
+	Usuarios admi;
+	Mascota masc;
 	veterinarios altav;
 	FILE *altaveterinarios;
-	altaveterinarios=fopen("altaveterinarios.dat","a+b");
+	altaveterinarios=fopen("altavet.dat","a+b");
 
 	
-		
 	
 	do
 	{
@@ -93,7 +108,7 @@ main()
 	 	system("pause");
 	 	break;
 	 	
-	 	case 2: recepcionista(mascota);
+	 	case 2: recepcionista(masc);
 	 	
 	 	system("pause");
 	 	break;
@@ -122,12 +137,16 @@ main()
 }
 
 //============================================================ADMINISTRACION============================================================	
-void administracion(administrador admi,FILE*altaveterinarios,veterinarios altav)
+void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
 {	
+	
 	int opcion;
+	printf("\nIngrese su nombre y apellido: ");
+	_flushall();
+	gets(admi.Apenom);
 	printf("\nIngrese su nuevo usuario: ");
 	_flushall();
-	gets(admi.apenom);
+	gets(admi.usuario);
 	printf ("\nElija una contraseña: ");
 	_flushall();
 	gets(admi.contra);
@@ -149,7 +168,7 @@ do
 	 scanf("%d", &opcion);
 	 switch(opcion)
 	 {
-	 	case 1: regvet(altaveterinarios,altav); 
+	 	case 1: regvet(altaveterinarios,admi); 
 	 	printf("1.- Registrar Veterinario\n");
 	 	system("pause");
 	 	break;
@@ -186,28 +205,35 @@ do
 
 }
 
-void regvet(FILE*altaveterinarios,veterinarios altav)
+void regvet(FILE*altaveterinarios,Usuarios admi)
 {
-
+	altaveterinarios=fopen("altavet.dat","a+b");
+	
 	if(altaveterinarios==NULL)
 	{
-	printf("no se pudo abrir el archivo");
-	 }
-	 
-	printf("Ingrese el Nombre del profesional");
-	gets(altav.nombre);
-
-	printf("Ingrese el Apellido "); 
-	gets(altav.apellido);
+		printf("no se pudo abrir el archivo");
+	}
+	else
+	{
+		
+	printf("Ingrese el Nombre y apellido del profesional: ");
+	_flushall();
+	gets(admi.Apenom);
 	
 	printf("Ingrese su usuario para el inicio de sesion");
-	gets(altav.usuario);
+	_flushall();
+	gets(admi.usuario);
 	
 	printf("Ingrese su contraseña");
-	gets(altav.contra);
+	gets(admi.contra);
 	
+	fwrite(&admi,sizeof(Usuarios),1,altaveterinarios);
+	}
+	 
+
+
 	
-	fwrite(&altav,sizeof(veterinarios),1,altaveterinarios);
+
 	
 	fclose(altaveterinarios);
 }
@@ -215,7 +241,7 @@ void regvet(FILE*altaveterinarios,veterinarios altav)
 
 
 //============================================================RECEPCION============================================================
-void recepcionista(paciente mascota)
+void recepcionista(Mascota masc)
 {
 	int opcion;
 	do

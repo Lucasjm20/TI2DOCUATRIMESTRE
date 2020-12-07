@@ -25,7 +25,9 @@ modulo consultorio:
 		 *poner estado evolucion de la mascota maximo 380
 		 * (historia clinica, comun a todos)
 		  se debe dejar registro del veterinario que escribio el estado de evolucion junto a la fecha
-	   	*se borra la mascota del listado*/
+	   	*se borra la mascota del listado
+		   */
+		   
 			
 ////============================================================FUNCIONES Y ESTRUCTURAS============================================================
 
@@ -55,7 +57,7 @@ struct veterinarios
 	char contra[100];
 };
 
-void administracion(administrador admi);
+void administracion(administrador admi,FILE*altaveterinarios,veterinarios altav);
 void recepcionista(paciente mascota);
 //void atencionvet();
 void regvet(FILE*altaveterinarios,veterinarios altav); 
@@ -67,7 +69,7 @@ main()
 	paciente mascota;
 	veterinarios altav;
 	FILE *altaveterinarios;
-	
+	altaveterinarios=fopen("altaveterinarios.dat","a+b");
 
 	
 		
@@ -86,7 +88,7 @@ main()
 	
  	switch(opcion)
 	 {
-	 	case 1: administracion(admi);
+	 	case 1: administracion(admi,altaveterinarios,altav);
 	 	
 	 	system("pause");
 	 	break;
@@ -186,7 +188,7 @@ do
 
 void regvet(FILE*altaveterinarios,veterinarios altav)
 {
-	altaveterinarios=fopen("altaveterinarios.dat","a+b");
+
 	if(altaveterinarios==NULL)
 	{
 	printf("no se pudo abrir el archivo");

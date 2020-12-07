@@ -40,7 +40,7 @@ struct Usuarios
     			            // el borrado logico es como cuando se borra un archivo y se va la papelera, el borrado fisico es cuando ya se borra lo que hay en la papelera xd
 };
 
-struct fecha
+struct fechaN
 {
 	int dia;
 	int mes;
@@ -53,7 +53,7 @@ struct Mascota
 	char domicilio[60];
 	int Dni_due;
 	char localidad[100];
-	fecha FechaNac;
+	fechaN FechaNac;
 	char telefono[25];
 };
 
@@ -65,10 +65,17 @@ struct veterinarios
 	char telefono[25];
 };
 
+struct fechaT
+{
+	int dia;
+	int mes;
+	int year;
+};
+
 struct turnos
 {
 	int Matriculavet;
-	fecha fechaturno;
+	fechaT fechaturno;
 	int Dni_due;
 	char evolucion[380];
 };
@@ -85,7 +92,6 @@ main()
 	Mascota masc;
 	veterinarios altav;
 	FILE *altaveterinarios;
-	altaveterinarios=fopen("altavet.dat","a+b");
 
 	
 	
@@ -139,82 +145,130 @@ main()
 //============================================================ADMINISTRACION============================================================	
 void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
 {	
+	char usuario[10], contra[10];
+	bool login=false;
+	int opcion,compara,compara2;
 	
-	int opcion;
-	printf("\nIngrese su nombre y apellido: ");
-	_flushall();
-	gets(admi.Apenom);
-	printf("\nIngrese su nuevo usuario: ");
-	_flushall();
-	gets(admi.usuario);
-	printf ("\nElija una contraseña: ");
-	_flushall();
-	gets(admi.contra);
+	altaveterinarios=fopen("Usuario.dat","a+b");
 	
-	printf("\nSu usuario fue registrado, bienvenido :D\n");
+	fseek( altaveterinarios, 0, SEEK_END );
+	
+	if (ftell( altaveterinarios ) == 0 )
+	{
+  		// fichero vacio	
+  
+		printf("\nBienvenido, cree su cuenta por unica vez: \n\n");
+		printf("\nIngrese su nombre y apellido: ");
+		_flushall();
+		gets(admi.Apenom);
+		printf("\nIngrese su nuevo usuario: ");
+		_flushall();
+		gets(admi.usuario);
+		printf ("\nElija una contraseña: ");
+		_flushall();
+		gets(admi.contra);
+		
+		fwrite(&admi,sizeof(admi),1,altaveterinarios);
+		
+		printf("\nSu usuario fue registrado\n");
+	}
+	fclose(altaveterinarios);
 	
 	system("pause");
-do
-{
+	
+	altaveterinarios=fopen("Usuario.dat","rb");
+	
 	system("cls");
-	printf("\nMódulo Administracion\n");
- 	printf("\n=========================\n");
- 	printf("\n1.- Registrar Veterinario\n");
- 	printf("\n2.- Registrar Usuario Asistente\n");
- 	printf("\n3.- Atenciones por Veterinarios\n");
-	printf("\n4.- Ranking de Veterinarios por Atenciones\n");
- 	printf("\n5.- Cerrar la aplicación.\n");
- 	printf("\nIngrese una opción: _");
-	 scanf("%d", &opcion);
-	 switch(opcion)
-	 {
-	 	case 1: regvet(altaveterinarios,admi); 
-	 	printf("1.- Registrar Veterinario\n");
-	 	system("pause");
-	 	break;
-	 	
-	 	case 2: //regrecepcionista();
-	 	printf("2.- Registrar Usuario Asistente\n");
-	 	system("pause");
-	 	break;
-	 	
-	 	case 3: //atencionvet();
-	 		printf("3.- Atenciones por Veterinarios\n");
-	 		system("pause");
-	 	break;
-	 	
-	 	case 4:// mejorveterinario();
-	 	printf("4.- Ranking de Veterinarios por Atenciones\n");
-	 	system("pause");
-	 	break;
-	 	
-	 	case 5: 
-	 	
-	 	printf("\nGracias por utilizar nuestros servicios.");
-	 	
-	 	break;
-	 	
-	 	
-	 	default:
-		printf("Ingreso una opcion incorrecta, ingrese nuevamente");
-		break;
-	 		
-	 }
- 
-}while(opcion!=5);
+	
+	printf("\nIngrese su usuario: ");
+	_flushall();
+	gets(usuario);
+	
+	printf("\nIngrese su contraseña: ");
+	_flushall();
+	gets(contra);
+	
+	rewind(altaveterinarios);
+	fread(&admi,sizeof(admi),1,altaveterinarios);
+    
+	while (!feof(altaveterinarios))
+	{
+		compara=strcmp(admi.usuario,usuario);
+		compara2=strcmp(admi.contra,contra);
+		
+		if (compara+compara2==0)
+		{
+			login=true;
+		};
+		
+		fread(&admi,sizeof(admi),1,altaveterinarios);
+	};
+	
+	if(login)
+	{
+		printf("\nBienvenido\n\n");
+	
+		do
+		{
+			system("cls");
+			printf("\nMódulo Administracion\n");
+		 	printf("\n=========================\n");
+		 	printf("\n1.- Registrar Veterinario\n");
+		 	printf("\n2.- Registrar Usuario Asistente\n");
+		 	printf("\n3.- Atenciones por Veterinarios\n");
+			printf("\n4.- Ranking de Veterinarios por Atenciones\n");
+		 	printf("\n5.- Cerrar la aplicación.\n");
+		 	printf("\nIngrese una opción: _");
+			 scanf("%d", &opcion);
+			 switch(opcion)
+			 {
+			 	case 1: regvet(altaveterinarios,admi); 
+			 	printf("1.- Registrar Veterinario\n");
+			 	system("pause");
+			 	break;
+			 	
+			 	case 2: //regrecepcionista();
+			 	printf("2.- Registrar Usuario Asistente\n");
+			 	system("pause");
+			 	break;
+			 	
+			 	case 3: //atencionvet();
+			 		printf("3.- Atenciones por Veterinarios\n");
+			 		system("pause");
+			 	break;
+			 	
+			 	case 4:// mejorveterinario();
+			 	printf("4.- Ranking de Veterinarios por Atenciones\n");
+			 	system("pause");
+			 	break;
+			 	
+			 	case 5: 
+			 	
+			 	printf("\nGracias por utilizar nuestros servicios.");
+			 	
+			 	break;
+			 	
+			 	
+			 	default:
+				printf("Ingreso una opcion incorrecta, ingrese nuevamente");
+				break;
+			 		
+			 }
+		 
+		}while(opcion!=5);
+	}
+	else
+	{
+		printf("\n\nIngreso mal su usuario o contraseña, vuelva a intentarlo\n");
+	}
+	fclose(altaveterinarios);
 
 }
 
 void regvet(FILE*altaveterinarios,Usuarios admi)
 {
-	altaveterinarios=fopen("altavet.dat","a+b");
+	altaveterinarios=fopen("Veterinarios.dat","a+b");
 	
-	if(altaveterinarios==NULL)
-	{
-		printf("no se pudo abrir el archivo");
-	}
-	else
-	{
 		
 	printf("Ingrese el Nombre y apellido del profesional: ");
 	_flushall();
@@ -228,7 +282,7 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
 	gets(admi.contra);
 	
 	fwrite(&admi,sizeof(Usuarios),1,altaveterinarios);
-	}
+
 	 
 
 

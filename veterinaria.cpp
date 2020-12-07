@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<conio.h>
 #include<string.h>
-
+#include<ctype.h>
 /*Modulo de Administracion: 
 	*Alta veterinario sistema
 	*Borrar al veterinario del sistema, junto a sus datos
@@ -161,9 +161,28 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
 		printf("\nIngrese su nombre y apellido: ");
 		_flushall();
 		gets(admi.Apenom);
+		
 		printf("\nIngrese su nuevo usuario: ");
 		_flushall();
 		gets(admi.usuario);
+		
+		int longitud = strlen(admi.usuario);
+		
+		
+		while(longitud<6 || longitud > 10)
+		{
+		printf("\nError debe tener como minimo 6 caracteres y como maximo 10 caracteres: ");
+		printf("\nIngrese su usuario nuevamente: ");
+		_flushall();
+		gets(admi.usuario);
+		
+		int longitud= strlen(admi.Apenom);
+		}
+		
+		
+		
+		
+		
 		printf ("\nElija una contraseña: ");
 		_flushall();
 		gets(admi.contra);

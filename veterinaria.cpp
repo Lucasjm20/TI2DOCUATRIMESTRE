@@ -1,8 +1,8 @@
-#include<stdio.h>
 #include<stdlib.h>
 #include<conio.h>
 #include<string.h>
 #include<ctype.h>
+#include<stdio.h>
 /*Modulo de Administracion: 
 	*Alta veterinario sistema
 	*Borrar al veterinario del sistema, junto a sus datos
@@ -146,8 +146,8 @@ main()
 void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
 {	
 	char usuario[10], contra[10];
-	bool login=false;
-	int opcion,compara,compara2;
+	bool login=false,usuariocorrecto=false,error=false;
+	int opcion,compara,compara2,i,digito,mayus;
 	
 	altaveterinarios=fopen("Usuario.dat","a+b");
 	
@@ -166,22 +166,50 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
 		_flushall();
 		gets(admi.usuario);
 		
-		int longitud = strlen(admi.usuario);
-		
-		
-		while(longitud<6 || longitud > 10)
+		while(usuariocorrecto==false)
 		{
-		printf("\nError debe tener como minimo 6 caracteres y como maximo 10 caracteres: ");
-		printf("\nIngrese su usuario nuevamente: ");
-		_flushall();
-		gets(admi.usuario);
+			
 		
-		int longitud= strlen(admi.Apenom);
+		int longitud = strlen(admi.usuario);
+		for(i=0;i<longitud;i++)
+	    {
+		if(isdigit(admi.usuario[i])){digito++;}
+		if(isupper(admi.usuario[i])){mayus++;}
+		//c. Tener al menos 2 letras mayúsculas. d. Tener como máximo 3 dígitos.
+		printf("tiene %d digitos y %d mayusculas",digito,mayus);
+     	}
+     	
+		 if((admi.usuario[0]<'a') && (admi.usuario[0]>'z'))
+		 {
+     		printf("\nNo comienza con minuscula, ingrese nuevamente");
+			 error=true;	
+		 }
+		
+		if((longitud<6) && (longitud > 10))
+		{
+			
+		printf("\nError debe tener como minimo 6 caracteres y como maximo 10 caracteres: ");
+		 error=true;
+		}
+		if((digito>3) && (mayus<2))
+		{
+			 printf("\nEl usuario debe tener al menos 2 mayus como 3 digitos como maximo");
+			  error=true;
+				
 		}
 		
 		
-		
-		
+		if(error==false)
+		{usuariocorrecto=true;
+		}
+		if(error==true)
+		{
+		printf("\nIngrese su nuevo usuario: ");
+		_flushall();
+		gets(admi.usuario);
+		}
+		}
+		printf("\nsu usuario se registro correctamente \n");
 		
 		printf ("\nElija una contraseña: ");
 		_flushall();

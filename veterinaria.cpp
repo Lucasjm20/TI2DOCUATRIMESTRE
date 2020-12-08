@@ -1,8 +1,9 @@
+#include<stdio.h>
 #include<stdlib.h>
 #include<conio.h>
 #include<string.h>
 #include<ctype.h>
-#include<stdio.h>
+#include <iostream>
 /*Modulo de Administracion: 
 	*Alta veterinario sistema
 	*Borrar al veterinario del sistema, junto a sus datos
@@ -14,9 +15,7 @@ modulo recepcion:
 	*Se hace el ingreso de las mascotas, datos necesarios:Apellido y Nombres de la mascota (el
 apellido corresponde al dueño o familia), DNI del dueño, Localidad, Edad (calculada con la fecha de nacimiento
 registrada), Peso.
-	* Debemos permitir obtener el informe de la historia clinica de la mascota
-	
-	
+	* Debemos permitir obtener el informe de la historia clinica de la mascot
 	
 modulo consultorio:
 	el vetereniario ingresa con su numero de matricula y contraseña 
@@ -28,7 +27,6 @@ modulo consultorio:
 	   	*se borra la mascota del listado
 		   */
 		   
-			
 ////============================================================FUNCIONES Y ESTRUCTURAS============================================================
 
 struct Usuarios
@@ -85,6 +83,7 @@ void recepcionista(Mascota masc);
 //void atencionvet();
 void regvet(FILE*altaveterinarios,Usuarios admi); 
 //============================================================PRINCIPAL============================================================
+using namespace std;
 main()
 {
 	int opcion	;
@@ -93,8 +92,6 @@ main()
 	veterinarios altav;
 	FILE *altaveterinarios;
 
-	
-	
 	do
 	{
 		system("cls");
@@ -104,7 +101,7 @@ main()
  	printf("\n2.- Modulo Asistente\n");
  	printf("\n3.- Modulo Veterinarios\n");
  	printf("\n4.- cerrar programa\n");
- 	printf("\nIngrese una opción: _");
+ 	printf("\nIngrese una opción: ");
 	scanf("%d", &opcion);
 	
  	switch(opcion)
@@ -132,28 +129,23 @@ main()
  	
 		
 	}
-	
-	
-	
-	
 
 	}while(opcion!=4);
-	
-	
+		
 }
 
 //============================================================ADMINISTRACION============================================================	
 void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
 {	
-	char usuario[10], contra[10];
+	char usuario[10], contra[10],aux[10];
 	bool login=false,usuariocorrecto=false,error=false;
-	int opcion,compara,compara2,i,digito,mayus;
+	int opcion,compara,compara2,longitud;
 	
 	altaveterinarios=fopen("Usuario.dat","a+b");
 	
-	fseek( altaveterinarios, 0, SEEK_END );
+	fseek(altaveterinarios, 0, SEEK_END );
 	
-	if (ftell( altaveterinarios ) == 0 )
+	if (ftell(altaveterinarios ) == 0 )
 	{
   		// fichero vacio	
   
@@ -162,58 +154,54 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
 		_flushall();
 		gets(admi.Apenom);
 		
+	do
+	{
+		int digito=0,mayus=0;
 		printf("\nIngrese su nuevo usuario: ");
 		_flushall();
 		gets(admi.usuario);
 		
-		while(usuariocorrecto==false)
-		{
-			
+		printf("\n");
+		printf(">>Ingreso: ");
+		puts(admi.usuario);
 		
-		int longitud = strlen(admi.usuario);
-		for(i=0;i<longitud;i++)
-	    {
-		if(isdigit(admi.usuario[i])){digito++;}
-		if(isupper(admi.usuario[i])){mayus++;}
-		//c. Tener al menos 2 letras mayúsculas. d. Tener como máximo 3 dígitos.
-		printf("tiene %d digitos y %d mayusculas",digito,mayus);
+		
+		longitud = strlen(admi.usuario);
+		printf("\n>>Tiene %d longitud",longitud);
+		
+		for(int i=0;i<=longitud;i++)
+		{
+			aux[i]=admi.usuario[i];
+		}
+		int i=0;
+		while(aux[i]!='\0')
+     	{
+	     	if((aux[i]=='0')|| (aux[i]=='1')|| (aux[i]=='2')|| (aux[i]=='3')|| (aux[i]=='4')|| (aux[i]=='5')|| (aux[i]=='6')|| (aux[i]=='7')|| (aux[i]=='8')|| (aux[i]=='9'))
+	     	{digito++;}
+			if((aux[i]>='A') && (aux[i]<='Z'))
+			{mayus++;}
+			i++;
      	}
      	
-		 if((admi.usuario[0]<'a') && (admi.usuario[0]>'z'))
-		 {
-     		printf("\nNo comienza con minuscula, ingrese nuevamente");
-			 error=true;	
-		 }
+     	printf("\n>>Tiene %d digitos y %d mayusculas",digito,mayus);
+		printf("\n>>Primer caracter %c",aux[0]);
 		
-		if((longitud<6) && (longitud > 10))
-		{
-			
-		printf("\nError debe tener como minimo 6 caracteres y como maximo 10 caracteres: ");
-		 error=true;
-		}
-		if((digito>3) && (mayus<2))
-		{
-			 printf("\nEl usuario debe tener al menos 2 mayus como 3 digitos como maximo");
-			  error=true;
-				
-		}
+			if((aux[0]>='a') && (aux[0]<='z') && (longitud>5) && (longitud<10) && (digito<4) && (mayus<3))
+				{
+					error=true;
+				}
+			else
+				{
+					printf("\nNo cumple alguna condicion, ingrese su nuevo usuario: ");
+					printf("\n=====================================================");
+			    }
+		}while(error!=true);
 		
-		
-		if(error==false)
-		{usuariocorrecto=true;
-		}
-		if(error==true)
-		{
-		printf("\nIngrese su nuevo usuario: ");
-		_flushall();
-		gets(admi.usuario);
-		}
-		}
-		printf("\nsu usuario se registro correctamente \n");
-		
+		printf("\nBienvenido, se registro correctamente");			
 		printf ("\nElija una contraseña: ");
 		_flushall();
 		gets(admi.contra);
+		
 		
 		fwrite(&admi,sizeof(admi),1,altaveterinarios);
 		

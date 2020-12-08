@@ -154,7 +154,9 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
 		
 	do{
 		int digito=0,mayus=0;
-		printf("\nIngrese su nuevo usuario: ");
+		
+		printf("\nSu usuario debe:\nContener entre 6 y 10 caracteres\ncomenzar con una letra minuscula\nTener al menos 2 letras mayusculas\nTener como maximo 3 digitos");
+		printf("\n\nIngrese su nuevo usuario: ");
 		_flushall();
 		gets(admi.usuario);
 		
@@ -183,23 +185,31 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
      	printf("\n>>Tiene %d digitos y %d mayusculas",digito,mayus);
 		printf("\n>>Primer caracter %c",aux[0]);
 		
-			if((aux[0]>='a') && (aux[0]<='z') && (longitud>5) && (longitud<10) && (digito<4) && (mayus<3))
+			if((aux[0]>='a') && (aux[0]<='z') && (longitud>5) && (longitud<10) && (digito<4) && (mayus>1))
 				{
 					error=true;
 				}
 			else
 				{
-					printf("\nNo cumple alguna condicion, ingrese su nuevo usuario: ");
-					printf("\n=====================================================");
+					
+					printf("\n\nNo cumple alguna condicion, intente nuevamente");
+					printf("\n=====================================================\n");
+					system("pause");
+					system("cls");
+					
 			    }
 		}while(error!=true);
 		
-		printf("\nSe registro correctamente,continuemos con la contraseña");			
+		printf("\n\nSe registro correctamente,continuemos con la contraseña\n");
+		system("pause");
+		system("cls");			
 		
 		do
 		{
 			int digitcon=0,maycon=0,caracterespecial=0,longitudcontra=0,mincon=0;
-			printf ("\nElija una contraseña: ");
+			
+			printf ("\nSu contraseña: \nDebe contener al menos una letra mayuscula, una minuscula y un numero\nNo puede contener caracteres especiales\nDebe tener entre 6 y 32 caracteres\nNo debe tener mas de 3 numeros consecutivos\nNo debe tener 2 letras consecutivas");
+			printf ("\n\nElija una contraseña: ");
 			_flushall();
 			gets(admi.contra);
 			
@@ -266,21 +276,27 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
 		
 		if((consecutivo==false)&&(digitcon>0)&&(maycon>0)&&(mincon>0)&&(caracterespecial==0)&&(longitudcontra>5)&&(longitudcontra<33))
 		{contrase=true;}
-		else{
-					printf("\nNo cumple alguna condicion, ingrese su nueva contraseña");
-					printf("\n=====================================================");
+		else
+		{
+				
+					printf("\n\nNo cumple alguna condicion, ingrese su nueva contraseña\n");
+					printf("\n=====================================================\n");	
+					system("pause");
+					system("cls");
+					
 		}
 		}while(contrase!=true);
 		
 	
 		
-		fwrite(&admi,sizeof(admi),1,altaveterinarios);
+		fwrite(&admi,sizeof(admi),1,altaveterinarios);//esto escribe el usuario en el archivo
 		
-		printf("\nSu usuario fue registrado\n");
+		printf("\n\nSu usuario fue registrado satisfactoriamente\n");
+		system("pause");
 	}
 	fclose(altaveterinarios);
 	
-	system("pause");
+	
 	
 	altaveterinarios=fopen("Usuario.dat","rb");
 	

@@ -125,9 +125,7 @@ main()
 	 	printf("4.- Ranking de Veterinarios por Atenciones\n");
 	 	system("pause");
 	 	break;
-	 	
- 	
-		
+	 		
 	}
 
 	}while(opcion!=4);
@@ -137,9 +135,9 @@ main()
 //============================================================ADMINISTRACION============================================================	
 void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
 {	
-	char usuario[10], contra[10],aux[10];
-	bool login=false,usuariocorrecto=false,error=false;
-	int opcion,compara,compara2,longitud;
+	char usuario[10], contra[10],aux[10],auxcontra[32];
+	bool login=false,error=false,contrase=false,consecutivo=false;
+	int opcion=0,compara=0,compara2=0,longitud=0;
 	
 	altaveterinarios=fopen("Usuario.dat","a+b");
 	
@@ -154,8 +152,7 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
 		_flushall();
 		gets(admi.Apenom);
 		
-	do
-	{
+	do{
 		int digito=0,mayus=0;
 		printf("\nIngrese su nuevo usuario: ");
 		_flushall();
@@ -176,7 +173,7 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
 		int i=0;
 		while(aux[i]!='\0')
      	{
-	     	if((aux[i]=='0')|| (aux[i]=='1')|| (aux[i]=='2')|| (aux[i]=='3')|| (aux[i]=='4')|| (aux[i]=='5')|| (aux[i]=='6')|| (aux[i]=='7')|| (aux[i]=='8')|| (aux[i]=='9'))
+	     	if((aux[i]>='0') && (aux[i]<='9'))
 	     	{digito++;}
 			if((aux[i]>='A') && (aux[i]<='Z'))
 			{mayus++;}
@@ -197,11 +194,85 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
 			    }
 		}while(error!=true);
 		
-		printf("\nBienvenido, se registro correctamente");			
-		printf ("\nElija una contraseña: ");
-		_flushall();
-		gets(admi.contra);
+		printf("\nSe registro correctamente,continuemos con la contraseña");			
 		
+		do
+		{
+			int digitcon=0,maycon=0,caracterespecial=0,longitudcontra=0,mincon=0;
+			printf ("\nElija una contraseña: ");
+			_flushall();
+			gets(admi.contra);
+			
+			printf("\nLO INGRESADO FUE:");
+			puts(admi.contra);
+			longitudcontra = strlen(admi.contra);
+			for(int j=0;j<=longitudcontra;j++)
+			{
+				auxcontra[j]=admi.contra[j];
+			}
+			int j=0;
+			while(auxcontra[j]!='\0')
+	     	{
+		     	if((auxcontra[j]>='0') && (auxcontra[j]<='9'))
+		     	{digitcon++;}
+				if((auxcontra[j]>='A') && (auxcontra[j]<='Z'))
+				{maycon++;}
+				if((auxcontra[j]>='a') && (auxcontra[j]<='z'))
+				{mincon++;}
+				if(((auxcontra[j]>=32) && (auxcontra[j]<=47)) || ((auxcontra[j]>=58) && (auxcontra[j]<=64)) || ((auxcontra[j]>=91) && (auxcontra[j]<=96)) || ((auxcontra[j]>=123) && (auxcontra[j]<=255)))
+				{caracterespecial++;}
+				j++;
+	     	}
+	     	
+	     	int auxnova;
+	     	
+			 for(int j=0;j<longitudcontra;j++)
+			 {
+			 	if(((auxcontra[j]>=65) && (auxcontra[j]<=90)) || ((auxcontra[j]>=97) && (auxcontra[j]<=122)))
+			 	{
+			 		auxnova=auxcontra[j];
+					if(auxnova==auxcontra[j])
+					{
+						if(auxnova+1==auxcontra[j+1])
+						{
+							consecutivo=true;
+							printf("No debe tener dos caracteres consecutivos");
+							break;
+						}
+					}
+				}
+			 	if(((auxcontra[j]>=48) && (auxcontra[j]<=57))) 
+			 	{
+				 	auxnova=auxcontra[j];
+					if(auxnova==auxcontra[j])
+					{
+						if(auxnova+1==auxcontra[j+1])
+						{
+							if(auxnova+2==auxcontra[j+2])
+							{
+								consecutivo=true;
+								printf("No debe tener 3 caracteres numericos");
+								break;
+							}
+						}
+					}
+				}	
+			 }	
+	
+		printf("\n>>El numero digitos es %d, el numero de mayus es %d",digitcon,maycon);	
+		printf("\n>>El numero minus es %d",mincon);	
+		printf("\n>>El numero de caracteres especiales es %d",caracterespecial);
+		printf("\n>>La longitud es %d",longitudcontra );
+		
+		if((consecutivo==false)&&(digitcon>0)&&(maycon>0)&&(mincon>0)&&(caracterespecial==0)&&(longitudcontra>5)&&(longitudcontra<33))
+		{contrase=true;}
+		else{
+					printf("\nNo cumple alguna condicion, ingrese su nueva contraseña");
+					printf("\n=====================================================");
+		}
+		}while(contrase!=true);
+		
+	
 		
 		fwrite(&admi,sizeof(admi),1,altaveterinarios);
 		
@@ -318,12 +389,6 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
 	
 	fwrite(&admi,sizeof(Usuarios),1,altaveterinarios);
 
-	 
-
-
-	
-
-	
 	fclose(altaveterinarios);
 }
 

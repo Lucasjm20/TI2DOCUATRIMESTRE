@@ -541,7 +541,7 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
 		
 	
 		
-		fwrite(&admi,sizeof(Usuarios),1,altaveterinarios);//esto escribe el usuario en el archivo
+		fwrite(&admi,sizeof(admi),1,altaveterinarios);//esto escribe el usuario en el archivo
 		
 		printf("\n\nSu usuario fue registrado satisfactoriamente\n");
 		system("pause");

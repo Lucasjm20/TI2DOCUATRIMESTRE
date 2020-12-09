@@ -185,7 +185,7 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
      	printf("\n>>Tiene %d digitos y %d mayusculas",digito,mayus);
 		printf("\n>>Primer caracter %c",aux[0]);
 		
-			if((aux[0]>='a') && (aux[0]<='z') && (longitud>5) && (longitud<10) && (digito<4) && (mayus>1))
+			if((aux[0]>='a') && (aux[0]<='z') && (longitud>5) && (longitud<11) && (digito<4) && (mayus>1))
 				{
 					error=true;
 				}

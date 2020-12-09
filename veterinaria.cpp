@@ -80,6 +80,7 @@ struct turnos
 
 void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav);
 void recepcionista(Mascota masc);
+void regrecepcionista(FILE*altaveterinarios,Usuarios admi);
 //void atencionvet();
 void regvet(FILE*altaveterinarios,Usuarios admi); 
 //============================================================PRINCIPAL============================================================
@@ -349,12 +350,12 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
 			 switch(opcion)
 			 {
 			 	case 1: regvet(altaveterinarios,admi); 
-			 	printf("1.- Registrar Veterinario\n");
+			
 			 	system("pause");
 			 	break;
 			 	
-			 	case 2: //regrecepcionista();
-			 	printf("2.- Registrar Usuario Asistente\n");
+			 	case 2: regrecepcionista(altaveterinarios,admi);
+			
 			 	system("pause");
 			 	break;
 			 	
@@ -552,7 +553,163 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
 
 
 }
-
+void regrecepcionista(FILE*altaveterinarios,Usuarios admi)
+{
+	int longitud;
+	char usuario[10], contra[10],aux[10],auxcontra[32];
+	bool login=false,error=false,contrase=false,consecutivo=false;
+	altaveterinarios=fopen("Recepcionistas.dat","a+b");
+	
+		
+	printf("Ingrese el Nombre y apellido del Recepcionista: ");
+	_flushall();
+	gets(admi.Apenom);
+	
+	do{
+		int digito=0,mayus=0;
+		
+		printf("\nEl usuario del recepcionista debe:\nContener entre 6 y 10 caracteres\ncomenzar con una letra minuscula\nTener al menos 2 letras mayusculas\nTener como maximo 3 digitos");
+		printf("\n\nIngrese usuario del recepcionista: ");
+		_flushall();
+		gets(admi.usuario);
+		
+		printf("\n");
+		printf(">>Ingreso: ");
+		puts(admi.usuario);
+		
+		
+		longitud = strlen(admi.usuario);
+		printf("\n>>Tiene %d longitud",longitud);
+		
+		for(int i=0;i<=longitud;i++)
+		{
+			aux[i]=admi.usuario[i];
+		}
+		int i=0;
+		while(aux[i]!='\0')
+     	{
+	     	if((aux[i]>='0') && (aux[i]<='9'))
+	     	{digito++;}
+			if((aux[i]>='A') && (aux[i]<='Z'))
+			{mayus++;}
+			i++;
+     	}
+     	
+     	printf("\n>>Tiene %d digitos y %d mayusculas",digito,mayus);
+		printf("\n>>Primer caracter %c",aux[0]);
+		
+			if((aux[0]>='a') && (aux[0]<='z') && (longitud>5) && (longitud<11) && (digito<4) && (mayus>1))
+				{
+					error=true;
+				}
+			else
+				{
+					
+					printf("\n\nNo cumple alguna condicion, intente nuevamente");
+					printf("\n=====================================================\n");
+					system("pause");
+					system("cls");
+					
+			    }
+	}while(error!=true);
+		
+		printf("\n\nSe registro correctamente,continuemos con la contraseña\n");
+		system("pause");
+		system("cls");			
+	
+	
+		do
+		{
+			int digitcon=0,maycon=0,caracterespecial=0,longitudcontra=0,mincon=0;
+			
+			printf ("\nLa contraseña del recepcionista: \nDebe contener al menos una letra mayuscula, una minuscula y un numero\nNo puede contener caracteres especiales\nDebe tener entre 6 y 32 caracteres\nNo debe tener mas de 3 numeros consecutivos\nNo debe tener 2 letras consecutivas");
+			printf ("\n\nElija una contraseña: ");
+			_flushall();
+			gets(admi.contra);
+			
+			printf("\nLO INGRESADO FUE:");
+			puts(admi.contra);
+			longitudcontra = strlen(admi.contra);
+			for(int j=0;j<=longitudcontra;j++)
+			{
+				auxcontra[j]=admi.contra[j];
+			}
+			int j=0;
+			while(auxcontra[j]!='\0')
+	     	{
+		     	if((auxcontra[j]>='0') && (auxcontra[j]<='9'))
+		     	{digitcon++;}
+				if((auxcontra[j]>='A') && (auxcontra[j]<='Z'))
+				{maycon++;}
+				if((auxcontra[j]>='a') && (auxcontra[j]<='z'))
+				{mincon++;}
+				if(((auxcontra[j]>=32) && (auxcontra[j]<=47)) || ((auxcontra[j]>=58) && (auxcontra[j]<=64)) || ((auxcontra[j]>=91) && (auxcontra[j]<=96)) || ((auxcontra[j]>=123) && (auxcontra[j]<=255)))
+				{caracterespecial++;}
+				j++;
+	     	}
+	     	
+	     	int auxnova;
+	     	
+			 for(int j=0;j<longitudcontra;j++)
+			 {
+			 	if(((auxcontra[j]>=65) && (auxcontra[j]<=90)) || ((auxcontra[j]>=97) && (auxcontra[j]<=122)))
+			 	{
+			 		auxnova=auxcontra[j];
+					if(auxnova==auxcontra[j])
+					{
+						if(auxnova+1==auxcontra[j+1])
+						{
+							consecutivo=true;
+							printf("No debe tener dos caracteres consecutivos");
+							break;
+						}
+					}
+				}
+			 	if(((auxcontra[j]>=48) && (auxcontra[j]<=57))) 
+			 	{
+				 	auxnova=auxcontra[j];
+					if(auxnova==auxcontra[j])
+					{
+						if(auxnova+1==auxcontra[j+1])
+						{
+							if(auxnova+2==auxcontra[j+2])
+							{
+								consecutivo=true;
+								printf("No debe tener 3 caracteres numericos");
+								break;
+							}
+						}
+					}
+				}	
+			 }	
+	
+		printf("\n>>El numero digitos es %d, el numero de mayus es %d",digitcon,maycon);	
+		printf("\n>>El numero minus es %d",mincon);	
+		printf("\n>>El numero de caracteres especiales es %d",caracterespecial);
+		printf("\n>>La longitud es %d",longitudcontra );
+		
+		if((consecutivo==false)&&(digitcon>0)&&(maycon>0)&&(mincon>0)&&(caracterespecial==0)&&(longitudcontra>5)&&(longitudcontra<33))
+		{contrase=true;}
+		else
+		{
+				
+					printf("\n\nNo cumple alguna condicion, ingrese su nueva contraseña\n");
+					printf("\n=====================================================\n");	
+					system("pause");
+					system("cls");
+					
+		}
+		}while(contrase!=true);
+		
+	
+		
+		fwrite(&admi,sizeof(admi),1,altaveterinarios);//esto escribe el usuario en el archivo
+		
+		printf("\n\nEl usuario del recepcionista fue registrado satisfactoriamente\n");
+		system("pause");
+	    fclose(altaveterinarios);
+	
+}
 
 
 //============================================================RECEPCION============================================================

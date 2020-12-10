@@ -137,7 +137,7 @@ main()
 void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
 {	
 	char usuario[10], contra[10],aux[10],auxcontra[32];
-	bool login=false,error=false,contrase=false,consecutivo=false;
+	bool login=false,error=false,contrase=false;
 	int opcion=0,compara=0,compara2=0,longitud=0;
 	
 	altaveterinarios=fopen("Usuario.dat","a+b");
@@ -208,7 +208,7 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
 		do
 		{
 			int digitcon=0,maycon=0,caracterespecial=0,longitudcontra=0,mincon=0;
-			
+			bool consecutivo=false;
 			printf ("\nSu contraseña: \nDebe contener al menos una letra mayuscula, una minuscula y un numero\nNo puede contener caracteres especiales\nDebe tener entre 6 y 32 caracteres\nNo debe tener mas de 3 numeros consecutivos\nNo debe tener 2 letras consecutivas");
 			printf ("\n\nElija una contraseña: ");
 			_flushall();
@@ -394,9 +394,9 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
 
 void regvet(FILE*altaveterinarios,Usuarios admi)
 {
-	int longitud;
+	int longitud,repite;
 	char usuario[10], contra[10],aux[10],auxcontra[32];
-	bool login=false,error=false,contrase=false,consecutivo=false;
+	bool login=false,error=false,contrase=false;
 	altaveterinarios=fopen("Veterinarios.dat","a+b");
 	
 		
@@ -405,6 +405,7 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
 	gets(admi.Apenom);
 	
 	do{
+		bool repeticion=false;
 		int digito=0,mayus=0;
 		
 		printf("\nEl usuario del veterinario debe:\nContener entre 6 y 10 caracteres\ncomenzar con una letra minuscula\nTener al menos 2 letras mayusculas\nTener como maximo 3 digitos");
@@ -437,7 +438,23 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
      	printf("\n>>Tiene %d digitos y %d mayusculas",digito,mayus);
 		printf("\n>>Primer caracter %c",aux[0]);
 		
-			if((aux[0]>='a') && (aux[0]<='z') && (longitud>5) && (longitud<11) && (digito<4) && (mayus>1))
+		fread(&admi,sizeof(admi),1,altaveterinarios);
+		
+		while (!feof(altaveterinarios))
+		{
+			repite=strcmp(aux,admi.usuario);
+			
+			if (repite==0)
+			{
+				repeticion=true;
+				printf("\n>>El nombre de usuario ingresado, ya esta registrado");
+				break;
+			}
+			
+			fread(&admi,sizeof(admi),1,altaveterinarios);
+		}
+		
+			if((aux[0]>='a') && (aux[0]<='z') && (longitud>5) && (longitud<11) && (digito<4) && (mayus>1) && (repeticion==false))
 				{
 					error=true;
 				}
@@ -450,7 +467,7 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
 					system("cls");
 					
 			    }
-		}while(error!=true);
+	}while(error!=true);
 		
 		printf("\n\nSe registro correctamente,continuemos con la contraseña\n");
 		system("pause");
@@ -460,7 +477,7 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
 		do
 		{
 			int digitcon=0,maycon=0,caracterespecial=0,longitudcontra=0,mincon=0;
-			
+			bool consecutivo=false;
 			printf ("\nLa contraseña del veterinario: \nDebe contener al menos una letra mayuscula, una minuscula y un numero\nNo puede contener caracteres especiales\nDebe tener entre 6 y 32 caracteres\nNo debe tener mas de 3 numeros consecutivos\nNo debe tener 2 letras consecutivas");
 			printf ("\n\nElija una contraseña: ");
 			_flushall();
@@ -553,11 +570,12 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
 
 
 }
+
 void regrecepcionista(FILE*altaveterinarios,Usuarios admi)
 {
-	int longitud;
+	int longitud,repite;
 	char usuario[10], contra[10],aux[10],auxcontra[32];
-	bool login=false,error=false,contrase=false,consecutivo=false;
+	bool login=false,error=false,contrase=false;
 	altaveterinarios=fopen("Recepcionistas.dat","a+b");
 	
 		
@@ -566,6 +584,7 @@ void regrecepcionista(FILE*altaveterinarios,Usuarios admi)
 	gets(admi.Apenom);
 	
 	do{
+		bool repeticion=false;
 		int digito=0,mayus=0;
 		
 		printf("\nEl usuario del recepcionista debe:\nContener entre 6 y 10 caracteres\ncomenzar con una letra minuscula\nTener al menos 2 letras mayusculas\nTener como maximo 3 digitos");
@@ -598,6 +617,21 @@ void regrecepcionista(FILE*altaveterinarios,Usuarios admi)
      	printf("\n>>Tiene %d digitos y %d mayusculas",digito,mayus);
 		printf("\n>>Primer caracter %c",aux[0]);
 		
+		fread(&admi,sizeof(admi),1,altaveterinarios);
+		
+		while (!feof(altaveterinarios))
+		{
+			repite=strcmp(aux,admi.usuario);
+			
+			if (repite==0)
+			{
+				repeticion=true;
+				printf("\n>>El nombre de usuario ingresado, ya esta registrado");
+				break;
+			}
+			
+			fread(&admi,sizeof(admi),1,altaveterinarios);
+		}
 			if((aux[0]>='a') && (aux[0]<='z') && (longitud>5) && (longitud<11) && (digito<4) && (mayus>1))
 				{
 					error=true;
@@ -621,7 +655,7 @@ void regrecepcionista(FILE*altaveterinarios,Usuarios admi)
 		do
 		{
 			int digitcon=0,maycon=0,caracterespecial=0,longitudcontra=0,mincon=0;
-			
+			bool consecutivo=false;
 			printf ("\nLa contraseña del recepcionista: \nDebe contener al menos una letra mayuscula, una minuscula y un numero\nNo puede contener caracteres especiales\nDebe tener entre 6 y 32 caracteres\nNo debe tener mas de 3 numeros consecutivos\nNo debe tener 2 letras consecutivas");
 			printf ("\n\nElija una contraseña: ");
 			_flushall();

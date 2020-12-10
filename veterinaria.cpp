@@ -438,6 +438,7 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
      	printf("\n>>Tiene %d digitos y %d mayusculas",digito,mayus);
 		printf("\n>>Primer caracter %c",aux[0]);
 		
+		rewind(altaveterinarios);
 		fread(&admi,sizeof(admi),1,altaveterinarios);
 		
 		while (!feof(altaveterinarios))
@@ -562,7 +563,7 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
 		fwrite(&admi,sizeof(admi),1,altaveterinarios);//esto escribe el usuario en el archivo
 		
 		printf("\n\nSu usuario fue registrado satisfactoriamente\n");
-		system("pause");
+		
 	    fclose(altaveterinarios);
 	
 	
@@ -617,6 +618,7 @@ void regrecepcionista(FILE*altaveterinarios,Usuarios admi)
      	printf("\n>>Tiene %d digitos y %d mayusculas",digito,mayus);
 		printf("\n>>Primer caracter %c",aux[0]);
 		
+		rewind(altaveterinarios);
 		fread(&admi,sizeof(admi),1,altaveterinarios);
 		
 		while (!feof(altaveterinarios))
@@ -639,12 +641,13 @@ void regrecepcionista(FILE*altaveterinarios,Usuarios admi)
 			else
 				{
 					
-					printf("\n\nNo cumple alguna condicion, intente nuevamente");
+					printf("\n\nNo cumple alguna condicion");
 					printf("\n=====================================================\n");
 					system("pause");
 					system("cls");
 					
 			    }
+			    
 	}while(error!=true);
 		
 		printf("\n\nSe registro correctamente,continuemos con la contraseña\n");
@@ -740,7 +743,7 @@ void regrecepcionista(FILE*altaveterinarios,Usuarios admi)
 		fwrite(&admi,sizeof(admi),1,altaveterinarios);//esto escribe el usuario en el archivo
 		
 		printf("\n\nEl usuario del recepcionista fue registrado satisfactoriamente\n");
-		system("pause");
+		
 	    fclose(altaveterinarios);
 	
 }

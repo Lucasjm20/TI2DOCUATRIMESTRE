@@ -154,7 +154,7 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
 		gets(admi.Apenom);
 		
 	do{
-		int digito=0,mayus=0;
+		int digito=0,mayus=0,c=0;
 		
 		printf("\nSu usuario debe:\nContener entre 6 y 10 caracteres\ncomenzar con una letra minuscula\nTener al menos 2 letras mayusculas\nTener como maximo 3 digitos");
 		printf("\n\nIngrese su nuevo usuario: ");
@@ -193,9 +193,14 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
 			else
 				{
 					
-					printf("\n\nNo cumple alguna condicion, intente nuevamente");
+					printf("\n\nNo cumple alguna condicion");
 					printf("\n=====================================================\n");
-					system("pause");
+					printf("\nSi desea salir presione 1, si quiere volver a intentar presione otra tecla: ");
+					scanf("%d", &c);
+					if(c==1)
+					{
+						return;
+					}
 					system("cls");
 					
 			    }
@@ -207,7 +212,7 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
 		
 		do
 		{
-			int digitcon=0,maycon=0,caracterespecial=0,longitudcontra=0,mincon=0;
+			int digitcon=0,maycon=0,caracterespecial=0,longitudcontra=0,mincon=0,c=0;
 			bool consecutivo=false;
 			printf ("\nSu contraseña: \nDebe contener al menos una letra mayuscula, una minuscula y un numero\nNo puede contener caracteres especiales\nDebe tener entre 6 y 32 caracteres\nNo debe tener mas de 3 numeros consecutivos\nNo debe tener 2 letras consecutivas");
 			printf ("\n\nElija una contraseña: ");
@@ -281,8 +286,14 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
 		{
 				
 					printf("\n\nNo cumple alguna condicion, ingrese su nueva contraseña\n");
-					printf("\n=====================================================\n");	
-					system("pause");
+					printf("\n=====================================================\n");
+					printf("\nSi desea salir presione 1, si quiere volver a intentar presione otra tecla: ");
+					scanf("%d", &c);
+					if(c==1)
+					{
+						return;
+					}	
+					
 					system("cls");
 					
 		}
@@ -406,7 +417,7 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
 	
 	do{
 		bool repeticion=false;
-		int digito=0,mayus=0;
+		int digito=0,mayus=0,c=0;
 		
 		printf("\nEl usuario del veterinario debe:\nContener entre 6 y 10 caracteres\ncomenzar con una letra minuscula\nTener al menos 2 letras mayusculas\nTener como maximo 3 digitos");
 		printf("\n\nIngrese usuario del veterinario: ");
@@ -464,7 +475,12 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
 					
 					printf("\n\nNo cumple alguna condicion, intente nuevamente");
 					printf("\n=====================================================\n");
-					system("pause");
+					printf("\nSi desea salir presione 1, si quiere volver a intentar presione otra tecla: ");
+					scanf("%d", &c);
+					if(c==1)
+					{
+						return;
+					}
 					system("cls");
 					
 			    }
@@ -477,7 +493,7 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
 	
 		do
 		{
-			int digitcon=0,maycon=0,caracterespecial=0,longitudcontra=0,mincon=0;
+			int digitcon=0,maycon=0,caracterespecial=0,longitudcontra=0,mincon=0,c=0;
 			bool consecutivo=false;
 			printf ("\nLa contraseña del veterinario: \nDebe contener al menos una letra mayuscula, una minuscula y un numero\nNo puede contener caracteres especiales\nDebe tener entre 6 y 32 caracteres\nNo debe tener mas de 3 numeros consecutivos\nNo debe tener 2 letras consecutivas");
 			printf ("\n\nElija una contraseña: ");
@@ -552,7 +568,12 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
 				
 					printf("\n\nNo cumple alguna condicion, ingrese su nueva contraseña\n");
 					printf("\n=====================================================\n");	
-					system("pause");
+					printf("\nSi desea salir presione 1, si quiere volver a intentar presione otra tecla: ");
+					scanf("%d", &c);
+					if(c==1)
+					{
+						return;
+					}
 					system("cls");
 					
 		}
@@ -586,7 +607,7 @@ void regrecepcionista(FILE*altaveterinarios,Usuarios admi)
 	
 	do{
 		bool repeticion=false;
-		int digito=0,mayus=0;
+		int digito=0,mayus=0,c=0;
 		
 		printf("\nEl usuario del recepcionista debe:\nContener entre 6 y 10 caracteres\ncomenzar con una letra minuscula\nTener al menos 2 letras mayusculas\nTener como maximo 3 digitos");
 		printf("\n\nIngrese usuario del recepcionista: ");
@@ -643,7 +664,12 @@ void regrecepcionista(FILE*altaveterinarios,Usuarios admi)
 					
 					printf("\n\nNo cumple alguna condicion");
 					printf("\n=====================================================\n");
-					system("pause");
+					printf("\nSi desea salir presione 1, si quiere volver a intentar presione otra tecla: ");
+					scanf("%d", &c);
+					if(c==1)
+					{
+						return;
+					}
 					system("cls");
 					
 			    }
@@ -657,7 +683,7 @@ void regrecepcionista(FILE*altaveterinarios,Usuarios admi)
 	
 		do
 		{
-			int digitcon=0,maycon=0,caracterespecial=0,longitudcontra=0,mincon=0;
+			int digitcon=0,maycon=0,caracterespecial=0,longitudcontra=0,mincon=0,c=0;
 			bool consecutivo=false;
 			printf ("\nLa contraseña del recepcionista: \nDebe contener al menos una letra mayuscula, una minuscula y un numero\nNo puede contener caracteres especiales\nDebe tener entre 6 y 32 caracteres\nNo debe tener mas de 3 numeros consecutivos\nNo debe tener 2 letras consecutivas");
 			printf ("\n\nElija una contraseña: ");
@@ -732,7 +758,12 @@ void regrecepcionista(FILE*altaveterinarios,Usuarios admi)
 				
 					printf("\n\nNo cumple alguna condicion, ingrese su nueva contraseña\n");
 					printf("\n=====================================================\n");	
-					system("pause");
+					printf("\nSi desea salir presione 1, si quiere volver a intentar presione otra tecla: ");
+					scanf("%d", &c);
+					if(c==1)
+					{
+						return;
+					}
 					system("cls");
 					
 		}

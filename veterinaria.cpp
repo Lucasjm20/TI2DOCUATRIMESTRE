@@ -471,13 +471,13 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
      	printf("\n>>Tiene %d digitos y %d mayusculas",digito,mayus);
 		printf("\n>>Primer caracter %c",aux[0]);
 		
-	/*	rewind(altaveterinarios);
-		fread(&admi,sizeof(admi),1,altaveterinarios);
+		rewind(altaveterinarios);
+		fread(&admi.usuario,sizeof(admi),1,altaveterinarios);
 		
-		while (!feof(altaveterinarios))
+	while (!feof(altaveterinarios))
 		{
 			repite=strcmp(aux,admi.usuario);
-		
+			printf("\nAux: %s,admi.usuario: %s\n",aux,admi.usuario);
 			
 			if (repite==0)
 			{
@@ -486,8 +486,13 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
 				break;
 			}
 			
-			fread(&admi,sizeof(admi),1,altaveterinarios);
-		}*/
+			fread(&admi.usuario,sizeof(admi),1,altaveterinarios);
+		}
+		
+			for(int i=0;i<=longitud;i++)
+		{
+			admi.usuario[i]=aux[i];
+		}
 	
 			if((aux[0]>='a') && (aux[0]<='z') && (longitud>5) && (longitud<11) && (digito<4) && (mayus>1) && (repeticion==false))
 				{
@@ -662,7 +667,7 @@ void regrecepcionista(FILE*altaveterinarios,Usuarios admi)
      	printf("\n>>Tiene %d digitos y %d mayusculas",digito,mayus);
 		printf("\n>>Primer caracter %c",aux[0]);
 		
-	/*	rewind(altaveterinarios);
+		rewind(altaveterinarios);
 		fread(&admi,sizeof(char),1,altaveterinarios);
 		
 		while (!feof(altaveterinarios))
@@ -677,7 +682,13 @@ void regrecepcionista(FILE*altaveterinarios,Usuarios admi)
 			}
 			
 			fread(&admi,sizeof(char),1,altaveterinarios);
-		}*/
+		}
+		
+			for(int i=0;i<=longitud;i++)
+		{
+			admi.usuario[i]=aux[i];
+		}
+		
 			if((aux[0]>='a') && (aux[0]<='z') && (longitud>5) && (longitud<11) && (digito<4) && (mayus>1) && (repeticion==false))
 				{
 					error=true;
@@ -822,7 +833,7 @@ void recepcionista(Mascota masc, FILE*altaveterinarios,Usuarios admi)
 	_flushall();
 	gets(contra);
 	
-/*	rewind(altaveterinarios);
+	rewind(altaveterinarios);
 	fread(&admi,sizeof(admi),1,altaveterinarios);
     
 	while (!feof(altaveterinarios))
@@ -836,7 +847,7 @@ void recepcionista(Mascota masc, FILE*altaveterinarios,Usuarios admi)
 		};
 		
 		fread(&admi,sizeof(admi),1,altaveterinarios);
-	}; */
+	}; 
 	
 	
 	if(login==true)
@@ -951,18 +962,15 @@ void regmascota(Mascota masc, FILE*altaveterinarios)
 	_flushall();
 	gets(masc.telefono);
 	
-	
-	
-	/*
 	rewind(altaveterinarios);
 	fread(&masc,sizeof(masc),1,altaveterinarios);
     
 	while (!feof(altaveterinarios))
 	{
 		compara=strcmp(aux,masc.apenom);
-		printf("\nAux: %s, %s\n",aux,masc.apenom);
+		printf("\nAux: %s,masc.apenom: %s\n",aux,masc.apenom);
 	
-		if (compara==0)//&&aux2==masc.Dni_due
+		if (compara==0 && aux2==masc.Dni_due)
 		{
 			repite=true;
 			printf("Mascota ya registrada");
@@ -970,7 +978,15 @@ void regmascota(Mascota masc, FILE*altaveterinarios)
 		}
 		
 		fread(&masc,sizeof(masc),1,altaveterinarios);
-	}   */
+	}   
+	
+		for(int i=0;i<=longitud;i++)
+		{
+			masc.apenom[i]=aux[i];
+		}
+		
+		masc.Dni_due=aux2;
+		
 	
 
 	if(repite==false)

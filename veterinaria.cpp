@@ -47,6 +47,7 @@ struct Usuarios
 	char usuario[10];
 	char contra[10];
 	char Apenom[60];
+	int matricula;
 	//bool borrado=false; // siempre vamos a agregar el campo borrado porque a este campo lo vamos a utilizar para hacer borrados logicos
     			            // el borrado logico es como cuando se borra un archivo y se va la papelera, el borrado fisico es cuando ya se borra lo que hay en la papelera xd
 };
@@ -93,12 +94,12 @@ struct turnos
 
 void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav);
 
-void recepcionista(Mascota masc, FILE*altaveterinarios,Usuarios admi,turnos turnos_ok);
+void recepcionista(Mascota masc, FILE*altaveterinarios,Usuarios admi,turnos turnos_ok,FILE *turnosok);
 void regrecepcionista(FILE*altaveterinarios,Usuarios admi);
 void regmascota(Mascota masc, FILE*altaveterinarios);
-void registrarturno(Mascota masc, FILE*altaveterinarios,turnos turnos_ok);
+void registrarturno(Mascota masc, FILE*altaveterinarios,turnos turnos_ok,FILE *turnosok);
 
-void atencionvet(Mascota masc, FILE*altaveterinarios,Usuarios admi);
+void atencionvet(Mascota masc, FILE*altaveterinarios,Usuarios admi,FILE *turnosok);
 void regvet(FILE*altaveterinarios,Usuarios admi); 
 //============================================================PRINCIPAL============================================================
 using namespace std;
@@ -131,12 +132,12 @@ main()
 	 	system("pause");
 	 	break;
 	 	
-	 	case 2: recepcionista(masc,altaveterinarios,admi,turnos_ok);
+	 	case 2: recepcionista(masc,altaveterinarios,admi,turnos_ok,turnosok);
 	 	
 	 	system("pause");
 	 	break;
 	 	
-	 	case 3: atencionvet(masc,altaveterinarios,admi);
+	 	case 3: atencionvet(masc,altaveterinarios,admi,turnosok);
 
 	 	system("pause");
 	 	break;
@@ -600,6 +601,10 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
 		_flushall();
 		gets(admi.Apenom);
 		
+		printf("Ingrese Matricula del profesional: ");
+		_flushall();
+		scanf("%d",admi.matricula);
+		
 		fwrite(&admi,sizeof(admi),1,altaveterinarios);//esto escribe el usuario en el archivo
 		
 		printf("\n\nSu usuario fue registrado satisfactoriamente\n");
@@ -802,7 +807,7 @@ void regrecepcionista(FILE*altaveterinarios,Usuarios admi)
 
 
 //============================================================RECEPCION============================================================
-void recepcionista(Mascota masc, FILE*altaveterinarios,Usuarios admi,turnos turnos_ok)
+void recepcionista(Mascota masc, FILE*altaveterinarios,Usuarios admi,turnos turnos_ok,FILE *turnosok)
 {
 	int opcion,compara,compara2;
 	bool login=false;
@@ -864,7 +869,7 @@ void recepcionista(Mascota masc, FILE*altaveterinarios,Usuarios admi,turnos turn
 		 	system("pause");
 		 	break;
 		 	
-		 	case 2: registrarturno(masc,altaveterinarios,turnos_ok);
+		 	case 2: registrarturno(masc,altaveterinarios,turnos_ok,turnosok);
 		 	
 		 		system("pause");
 		 	break;
@@ -995,9 +1000,10 @@ void regmascota(Mascota masc, FILE*altaveterinarios)
 	
 }
 
-void registrarturno(Mascota masc, FILE*altaveterinarios,turnos turnos_ok)
+void registrarturno(Mascota masc, FILE*altaveterinarios,turnos turnos_ok,FILE *turnosok)
 {
-
+FILE *auxiliarvet;
+auxiliarvet=fopen("Veterinarios.dat","rb");
 altaveterinarios=fopen("Mascotas.dat","rb");	
 if (altaveterinarios== NULL)
 {
@@ -1020,34 +1026,79 @@ fread(&masc,sizeof(masc),1,altaveterinarios);
  printf("\n");
  fread(&masc,sizeof(masc),1,altaveterinarios);
  }
+ //fclose(altaveterinarios);
+ 
+	/*int Matriculavet;
+	fechaT fechaturno;
+	int Dni_due;
+	char evolucion[380];*/
+	
+turnosok=fopen("Turnos.dat","a+b");
+printf("\n Ingrese Matricula del veterinario: ");
+scanf("%d",&Matricula);
+
+	rewind(altaveterinarios);
+	fread(&admi,sizeof(admi),1,auxiliarvet);
+    
+	while (!feof(auxiliarvet))
+	{
+
+		if (Matriculavet==admi.matricula)
+		{
+			existe=true;
+			turnos_ok.Matriculavet=admi.matricula;
+		}
+			
+		fread(&admi,sizeof(admi),1,auxiliarvet);
+	}   
+ if(existe==false)
+ {
+ 	printf("\nLa matricula no existe");
+ 	return;
+ }
+
+//IF QUE TRABAJE EN CASO DE QUE EXISTA
+
+printf("\n Ingrese DNI del dueño: ");
+scanf("%d",&DNI);
+	
+	rewind(altaveterinarios);
+	fread(&masc,sizeof(masc),1,auxiliarvet);
+    
+	while (!feof(auxiliarvet))
+	{
+	
+		if (Matriculavet==admi.matricula)
+		{
+			existe=true;
+		}
+	
+		
+		fread(&masc,sizeof(masc),1,auxiliarvet);
+	}   
+	 if(existe==false)
+	 {
+	 	printf("\nLa matricula no existe");
+	 	return;
+	 }
+
+
+printf("\n Ingrese fecha del turno: ");
+        printf("\nDia: ");
+        scanf("%d",&turnos_ok.fechaT.dia);
+        printf("\nMes: ");
+        scanf("%d",&turnos_ok.fechaT.mes);
+        printf("\nAnio: ");
+        scanf("%d",&turnos_ok.fechaT.year);
+
+printf("\nEvolucion: ";);
+puts(turnos_ok.evolucion);
+
  fclose(altaveterinarios);
- 
- 
-
-/* ---------------------------------------------------------
-Nombre : buscarUnValor(...)
-Descripción : Borra del archivo el numero que recibe por parametro.
-Tipo Función : Con Tipo.
-Retorna : Cantidad de veces que se encontro el valor.
-Parámetros : Recibe
-1- El puntero del registro.
-2- El numero que debe buscar.
-------------------------------------------------------------*/
-/*int cantidadDeVeces = 0, numeroGuardado;
-
-rewind(archMultiplo); //Ubica el puntero en el primer valor que tiene el archivo.
-fread(&numeroGuardado, sizeof(int), 1, archMultiplo); //Lee el primer valor.
-while ( !feof(archMultiplo) ) //Mientras no se fin de archivo hacer
-{
-if(numeroGuardado == numeroQueBusca)
-cantidadDeVeces++;
-fread(&numeroGuardado, sizeof(int), 1 , archMultiplo);
-}
-return cantidadDeVeces;*/
-
+ fclose(turnosok);
 }
 //============================================================VETERINARIO============================================================
-void atencionvet(Mascota masc, FILE*altaveterinarios,Usuarios admi)
+void atencionvet(Mascota masc, FILE*altaveterinarios,Usuarios admi,FILE *turnosok)
 {
 	int opcion,compara,compara2;
 	bool login=false;

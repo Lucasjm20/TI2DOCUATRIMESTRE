@@ -471,7 +471,7 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
      	printf("\n>>Tiene %d digitos y %d mayusculas",digito,mayus);
 		printf("\n>>Primer caracter %c",aux[0]);
 		
-		rewind(altaveterinarios);
+	/*	rewind(altaveterinarios);
 		fread(&admi,sizeof(admi),1,altaveterinarios);
 		
 		while (!feof(altaveterinarios))
@@ -487,8 +487,8 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
 			}
 			
 			fread(&admi,sizeof(admi),1,altaveterinarios);
-		}
-		
+		}*/
+	
 			if((aux[0]>='a') && (aux[0]<='z') && (longitud>5) && (longitud<11) && (digito<4) && (mayus>1) && (repeticion==false))
 				{
 					error=true;
@@ -662,8 +662,8 @@ void regrecepcionista(FILE*altaveterinarios,Usuarios admi)
      	printf("\n>>Tiene %d digitos y %d mayusculas",digito,mayus);
 		printf("\n>>Primer caracter %c",aux[0]);
 		
-		rewind(altaveterinarios);
-		fread(&admi,sizeof(admi),1,altaveterinarios);
+	/*	rewind(altaveterinarios);
+		fread(&admi,sizeof(char),1,altaveterinarios);
 		
 		while (!feof(altaveterinarios))
 		{
@@ -676,8 +676,8 @@ void regrecepcionista(FILE*altaveterinarios,Usuarios admi)
 				break;
 			}
 			
-			fread(&admi,sizeof(admi),1,altaveterinarios);
-		}
+			fread(&admi,sizeof(char),1,altaveterinarios);
+		}*/
 			if((aux[0]>='a') && (aux[0]<='z') && (longitud>5) && (longitud<11) && (digito<4) && (mayus>1) && (repeticion==false))
 				{
 					error=true;
@@ -822,7 +822,7 @@ void recepcionista(Mascota masc, FILE*altaveterinarios,Usuarios admi)
 	_flushall();
 	gets(contra);
 	
-	rewind(altaveterinarios);
+/*	rewind(altaveterinarios);
 	fread(&admi,sizeof(admi),1,altaveterinarios);
     
 	while (!feof(altaveterinarios))
@@ -836,7 +836,7 @@ void recepcionista(Mascota masc, FILE*altaveterinarios,Usuarios admi)
 		};
 		
 		fread(&admi,sizeof(admi),1,altaveterinarios);
-	};
+	}; */
 	
 	
 	if(login==true)
@@ -953,6 +953,7 @@ void regmascota(Mascota masc, FILE*altaveterinarios)
 	
 	
 	
+	/*
 	rewind(altaveterinarios);
 	fread(&masc,sizeof(masc),1,altaveterinarios);
     
@@ -969,10 +970,10 @@ void regmascota(Mascota masc, FILE*altaveterinarios)
 		}
 		
 		fread(&masc,sizeof(masc),1,altaveterinarios);
-	}
+	}   */
 	
 
-		if(repite==false)
+	if(repite==false)
 	{
 		fwrite(&masc,sizeof(masc),1,altaveterinarios);
 	}

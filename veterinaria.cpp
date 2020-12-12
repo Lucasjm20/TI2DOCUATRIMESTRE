@@ -27,6 +27,24 @@ modulo consultorio:
 		  se debe dejar registro del veterinario que escribio el estado de evolucion junto a la fecha
 	   	*se borra la mascota del listado
 		   */
+ /*Bueno yo creo que nos falta esto lo digo por pasos
+
+Módulo recepción 
+Ingresar a la mascota 
+Darle un turno a la mascota
+
+Módulo consultorio
+Poder visualizar los turnos según el día (necesita ingresar matricular para verlo) 
+
+Dar la evolución de la mascota y borrar el turno 
+
+Módulo recepción 
+Podés visualizar las atenciones por fecha y veterinario
+
+Módulo administración
+Visualizar las atenciones dadas en el mes 
+
+Dar bono mensual*/
 		   
 ////============================================================FUNCIONES Y ESTRUCTURAS============================================================
 
@@ -48,7 +66,7 @@ struct fechaN
 
 struct Mascota
 {
-	char Apenom[60];
+	char apenom[60];
 	char domicilio[60];
 	int Dni_due;
 	char localidad[100];
@@ -80,8 +98,11 @@ struct turnos
 };
 
 void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav);
+
 void recepcionista(Mascota masc, FILE*altaveterinarios,Usuarios admi);
 void regrecepcionista(FILE*altaveterinarios,Usuarios admi);
+void regmascota(Mascota masc, FILE*altaveterinarios);
+
 void atencionvet(Mascota masc, FILE*altaveterinarios,Usuarios admi);
 void regvet(FILE*altaveterinarios,Usuarios admi); 
 //============================================================PRINCIPAL============================================================
@@ -456,6 +477,7 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
 		while (!feof(altaveterinarios))
 		{
 			repite=strcmp(aux,admi.usuario);
+		
 			
 			if (repite==0)
 			{
@@ -656,7 +678,7 @@ void regrecepcionista(FILE*altaveterinarios,Usuarios admi)
 			
 			fread(&admi,sizeof(admi),1,altaveterinarios);
 		}
-			if((aux[0]>='a') && (aux[0]<='z') && (longitud>5) && (longitud<11) && (digito<4) && (mayus>1))
+			if((aux[0]>='a') && (aux[0]<='z') && (longitud>5) && (longitud<11) && (digito<4) && (mayus>1) && (repeticion==false))
 				{
 					error=true;
 				}
@@ -835,7 +857,7 @@ void recepcionista(Mascota masc, FILE*altaveterinarios,Usuarios admi)
 			
 			switch(opcion)
 		 {
-		 	case 1: //regmascota();
+		 	case 1: regmascota(masc,altaveterinarios);
 		 	
 		 	system("pause");
 		 	break;
@@ -870,8 +892,102 @@ else
 	printf("\n\nIngreso mal su usuario o contraseña, vuelva a intentarlo\n");
 }	
 	fclose(altaveterinarios);
+	
 }
+/*struct Mascota
+{
+	char apenom[60];
+	char domicilio[60];
+	int Dni_due;
+	char localidad[100];
+	fechaN FechaNac;
+	char telefono[25];
+};*/
+void regmascota(Mascota masc, FILE*altaveterinarios)
+{
+	int aux2,compara,c,longitud;
+	char aux[60];
+	
+	
+	altaveterinarios=fopen("Mascotas.dat","a+b");
+	
+	do
+	{
+		
+	
+	bool repite=false;
+	printf("\nIngrese el nombre y apellido de la mascota (apellido de familia): ");
+	_flushall();
+	gets(masc.apenom);
+	
+	longitud = strlen(masc.apenom);
+	
+	for(int i=0;i<=longitud;i++)
+		{
+			aux[i]=masc.apenom[i];
+		}
+	
+	printf("\nDomicilio del dueño: ");
+	_flushall();
+	gets(masc.domicilio);
+	
+	printf("\nDNI del dueño: ");
+	scanf("%d", &masc.Dni_due);
+	aux2=masc.Dni_due;
+	
+	printf("\nLocalidad: ");
+	_flushall();
+	gets(masc.localidad);
+	
+	printf("\nFecha de nacimiento de la mascota:");
+        printf("\nDia: ");
+        scanf("%d",&masc.FechaNac.dia);
+        printf("\nMes: ");
+        scanf("%d",&masc.FechaNac.mes);
+        printf("\nAnio: ");
+        scanf("%d",&masc.FechaNac.year);
+        
+    printf("\nTelefono del dueño: ");
+	_flushall();
+	gets(masc.telefono);
+	
+	
+	
+	rewind(altaveterinarios);
+	fread(&masc,sizeof(masc),1,altaveterinarios);
+    
+	while (!feof(altaveterinarios))
+	{
+		compara=strcmp(aux,masc.apenom);
+		printf("\nAux: %s, %s\n",aux,masc.apenom);
+	
+		if (compara==0)//&&aux2==masc.Dni_due
+		{
+			repite=true;
+			printf("Mascota ya registrada");
+			break;
+		}
+		
+		fread(&masc,sizeof(masc),1,altaveterinarios);
+	}
+	
 
+		if(repite==false)
+	{
+		fwrite(&masc,sizeof(masc),1,altaveterinarios);
+	}
+	
+	printf("Quiere registrar otra mascota?\n 1: Si\n 2: No\n ");
+	scanf("%d", &c);
+	
+
+	
+	}while(c!=2);
+	
+	fclose(altaveterinarios);
+	
+    
+}
 
 //============================================================VETERINARIO============================================================
 void atencionvet(Mascota masc, FILE*altaveterinarios,Usuarios admi)

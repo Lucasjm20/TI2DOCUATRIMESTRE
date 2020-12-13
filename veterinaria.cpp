@@ -120,15 +120,37 @@ main()
 
 	do
 	{
-		system("cls");
-	printf("\n Menu principal\n");
- 	printf("\n =========================\n");
- 	printf("\n 1.- Modulo Administracion\n");
- 	printf("\n 2.- Modulo Recepcionista\n");
- 	printf("\n 3.- Modulo Veterinarios\n");
- 	printf("\n 4.- cerrar programa\n");
- 	printf("\n Ingrese una opción: ");
-	scanf("%d", &opcion);
+system("cls");
+printf("\n**********************************************************************");	
+printf("\n**********************************************************************");	
+printf("\n**                                                                  **");
+printf("\n**                                                                  **");
+printf("\n**                         Menu principal                           **");
+printf("\n**                   =========================                      **");
+printf("\n**                    1> Modulo Administracion                      **");
+printf("\n**                    2> Modulo Asistente                           **");
+printf("\n**                    3> Modulo Veterinarios                        **");
+printf("\n**                    4> cerrar programa                            **"); 
+printf("\n**                                                                  **");
+printf("\n**                                                                  **");
+printf("\n**                                                                  **"); 
+printf("\n**                                                                  **");
+printf("\n**                         @@@         @@@                          **");
+printf("\n**                       @@@@@@@    @@@@@@@                         **");
+printf("\n**                      @@@@@@@@   @@@@@@@@                         **");
+printf("\n**                 @@@   @@@@@@@   @@@@@@@@  @@@@                   **");
+printf("\n**                @@@@@@   @@@@      @@@@   @@@@@@                  **");
+printf("\n**                 @@@@@@    @@@@@@@@@@    @@@@@@                   **");
+printf("\n**                         @@@@@@@@@@@@@@                           **");
+printf("\n**                      @@@@@@@@@@@@@@@@@@@                         **");
+printf("\n**                     @@@@@@@@@@@@@@@@@@@@@@                       **");
+printf("\n**                    @@@@@@@@@@@@@@@@@@@@@@@                       **");
+printf("\n**                     @@@@@@@@@@@@@@@@@@@@@                        **");
+printf("\n**                       @@@@@@@@@@@@@@@@@@                         **");               
+printf("\n**************                @@@@@@@@                       *********");    
+printf("\n**********************************************************************");	   
+printf("\n\nIngrese una opcion: ");  
+scanf("%d", &opcion);
 	
  	switch(opcion)
 	 {
@@ -148,8 +170,30 @@ main()
 	 	break;
 	 	
 	 	case 4:// mejorveterinario();
-	 	printf("4.- Ranking de Veterinarios por Atenciones\n");
-	 	system("pause");
+system("cls");
+printf("\n\n");
+printf("\n@@@@@@@        @@@@@@@       @@@@@@@     @@@     @@@@ @@@@@@@@@@@@  @@@      @@@");
+printf("\n @@@@@@@       @@@@@@@      @@@@@@@      @@@     @@@@ @@@@@@@@@@@@  @@@@@    @@@");
+printf("\n  @@@@@@@@     @@@@@@@     @@@@@@@       @@@     @@@@     @@@@      @@@@@@   @@@");
+printf("\n    @@@@@@@@@  @@@@@@@ @@@@@@@@@@        @@@     @@@@     @@@@      @@@ @@@  @@@");
+printf("\n     @@@@@@@@@@@@@@@@@@@@@@@@            @@@     @@@@     @@@@      @@@  @@@ @@@");
+printf("\n         @@@@@@@@@@@@@@@@@@              @@@@    @@@@     @@@@      @@@   @@@@@@");
+printf("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@      @@@@@@@@@@      @@@@      @@@     @@@@");
+printf("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                                            ");
+printf("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@     @@@@@@@@@@@  @@@@@@@@@@@  @@@@@@@@@@@@@");
+printf("\n            @@@@@@@@@@@@@                @@@@         @@@@    @@@@      @@@@    ");
+printf("\n       @@@@@@@@@@@@@@@@@@@@@@            @@@@         @@@@     @@@      @@@@    ");
+printf("\n     @@@@@@@@@@@@@@@@@@@@@@@@@@@         @@@@@@@@@@   @@@@@@@@@@@       @@@@    ");
+printf("\n   @@@@@@@@    @@@@@@@   @@@@@@@@@       @@@@         @@@@   @@@@       @@@@    ");
+printf("\n  @@@@@@@      @@@@@@@      @@@@@@@      @@@@         @@@@    @@@@      @@@@    ");
+printf("\n @@@@@@@       @@@@@@@       @@@@@@@     @@@@         @@@@     @@@@     @@@@    ");
+printf("\n\n                                PARTICIPANTES:");
+printf("\n                                -Navarro Jorge");
+printf("\n                                -Martinez Lucas");
+printf("\n                                -Olivares Clara");
+printf("\n                                -Lopez Camila");
+printf("\n                                -Abril Moreno\n\n\n");
+system("pause");
 	 	break;
 	 		
 	}
@@ -172,24 +216,25 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
 	if (ftell(altaveterinarios ) == 0 )
 	{
   		// fichero vacio	
-  
-		printf("\nBienvenido, cree su cuenta por unica vez: \n\n");
+  		system("cls");
+		printf("\n\nBienvenido, cree su cuenta por unica vez!!\n\n");
 		
 	do{
 		int digito=0,mayus=0,c=0;
-		
-		printf("\nSu usuario debe:\nContener entre 6 y 10 caracteres\ncomenzar con una letra minuscula\nTener al menos 2 letras mayusculas\nTener como maximo 3 digitos");
-		printf("\n\nIngrese su nuevo usuario: ");
+		printf("------------- * -------------");
+		printf("\nSu usuario debe:\n-Contener entre 6 y 10 caracteres\n-Comenzar con una letra minuscula\n-Tener al menos 2 letras mayusculas\n-Tener como maximo 3 digitos");
+		printf("\n------------- * -------------");
+		printf("\n\n>>Ingrese su nuevo usuario: ");
 		_flushall();
 		gets(admi.usuario);
 		
-		printf("\n");
-		printf(">>Ingreso: ");
-		puts(admi.usuario);
+	//	printf("\n");
+	//	printf("--Ingreso: ");
+	//	puts(admi.usuario);
 		
 		
 		longitud = strlen(admi.usuario);
-		printf("\n>>Tiene %d longitud",longitud);
+	//	printf("\n--Tiene %d longitud",longitud);
 		
 		for(int i=0;i<=longitud;i++)
 		{
@@ -205,8 +250,8 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
 			i++;
      	}
      	
-     	printf("\n>>Tiene %d digitos y %d mayusculas",digito,mayus);
-		printf("\n>>Primer caracter %c",aux[0]);
+     //	printf("\n--Tiene %d digitos y %d mayusculas",digito,mayus);
+	//	printf("\n--Primer caracter %c",aux[0]);
 		
 			if((aux[0]>='a') && (aux[0]<='z') && (longitud>5) && (longitud<11) && (digito<4) && (mayus>1))
 				{
@@ -214,14 +259,17 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
 				}
 			else
 				{
-					
-					printf("\n\nNo cumple alguna condicion");
-					printf("\n=====================================================\n");
-					printf("\nSi desea salir presione 1, si quiere volver a intentar presione otra tecla: ");
+					printf("\n");
+					printf("\n------------- * -------------");
+					printf("\n  No cumple alguna condicion ");
+					printf("\n------------- * -------------");
+					printf("\n\nSi desea salir presione 1, si quiere volver a intentar presione otra tecla: ");
 					scanf("%d", &c);
 					if(c==1)
 					{
+						printf("\n");
 						fclose(altaveterinarios);
+						printf("\n");
 						return;
 					}
 					system("cls");
@@ -229,21 +277,25 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
 			    }
 		}while(error!=true);
 		
-		printf("\n\nSe registro correctamente,continuemos con la contraseña\n");
+		printf("\n\nSe registro correctamente,continuemos con la contraseña....\n\n");
+		printf("\n");
 		system("pause");
-		system("cls");			
+				
 		
 		do
 		{
 			int digitcon=0,maycon=0,caracterespecial=0,longitudcontra=0,mincon=0,c=0;
 			bool consecutivo=false;
-			printf ("\nSu contraseña: \nDebe contener al menos una letra mayuscula, una minuscula y un numero\nNo puede contener caracteres especiales\nDebe tener entre 6 y 10 caracteres\nNo debe tener mas de 3 numeros consecutivos\nNo debe tener 2 letras consecutivas");
-			printf ("\n\nElija una contraseña: ");
+			printf("\n\n");
+			printf("------------- * -------------");
+			printf ("\nSu contrasena debe: \n-Debe contener al menos una letra mayuscula, una minuscula y un numero\n-No puede contener caracteres especiales\n-Debe tener entre 6 y 10 caracteres\n-No debe tener mas de 3 numeros consecutivos\n-No debe tener 2 letras consecutivas");
+			printf("\n------------- * -------------");
+			printf ("\n\n>>Elija una contraseNa: ");
 			_flushall();
 			gets(admi.contra);
 			
-			printf("\nLO INGRESADO FUE:");
-			puts(admi.contra);
+		//	printf("\n--Lo ingresado fue:");
+		//	puts(admi.contra);
 			longitudcontra = strlen(admi.contra);
 			for(int j=0;j<=longitudcontra;j++)
 			{
@@ -275,7 +327,8 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
 						if(auxnova+1==auxcontra[j+1])
 						{
 							consecutivo=true;
-							printf("No debe tener dos caracteres consecutivos");
+							printf("\nERROR  - No debe tener dos caracteres consecutivos -  ERROR");
+							printf("\n\n");
 							break;
 						}
 					}
@@ -290,7 +343,8 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
 							if(auxnova+2==auxcontra[j+2])
 							{
 								consecutivo=true;
-								printf("No debe tener 3 caracteres numericos");
+								printf("\nERROR  - No debe tener 3 caracteres numericos -  ERROR");
+								printf("\n");
 								break;
 							}
 						}
@@ -298,23 +352,25 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
 				}	
 			 }	
 	
-		printf("\n>>El numero digitos es %d, el numero de mayus es %d",digitcon,maycon);	
-		printf("\n>>El numero minus es %d",mincon);	
-		printf("\n>>El numero de caracteres especiales es %d",caracterespecial);
-		printf("\n>>La longitud es %d",longitudcontra );
+	//	printf("\n--El numero digitos es %d, el numero de mayus es %d",digitcon,maycon);	
+	//	printf("\n--El numero minus es %d",mincon);	
+	//	printf("\n--El numero de caracteres especiales es %d",caracterespecial);
+	//	printf("\n--La longitud es %d",longitudcontra );
 		
 		if((consecutivo==false)&&(digitcon>0)&&(maycon>0)&&(mincon>0)&&(caracterespecial==0)&&(longitudcontra>5)&&(longitudcontra<11))
 		{contrase=true;}
 		else
 		{
-				
-					printf("\n\nNo cumple alguna condicion, ingrese su nueva contraseña\n");
-					printf("\n=====================================================\n");
-					printf("\nSi desea salir presione 1, si quiere volver a intentar presione otra tecla: ");
+					printf("\n\n----------------------- * -----------------------");
+					printf("\n  No cumple alguna condicion, ingrese nuevamente ");
+					printf("\n----------------------- * -----------------------");
+					printf("\n\nSi desea salir presione 1, si quiere volver a intentar presione otra tecla: ");
 					scanf("%d", &c);
 					if(c==1)
 					{
+						printf("\n");
 						fclose(altaveterinarios);
+						printf("\n");
 						return;
 					}	
 					
@@ -323,13 +379,13 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
 		}
 		}while(contrase!=true);
 		
-		printf("\nIngrese su nombre y apellido: ");
+		printf("\n>>Ingrese su nombre y apellido: ");
 		_flushall();
 		gets(admi.Apenom);
 		
 		fwrite(&admi,sizeof(admi),1,altaveterinarios);//esto escribe el usuario en el archivo
 		
-		printf("\n\nSu usuario fue registrado satisfactoriamente\n");
+		printf("\n\nSu usuario fue registrado satisfactoriamente!!!!\n\n\n");
 		system("pause");
 	}
 	fclose(altaveterinarios);
@@ -338,12 +394,12 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
 	altaveterinarios=fopen("Usuario.dat","rb");
 	
 	system("cls");
-	
-	printf("\nIngrese su usuario: ");
+	printf("\n=====Iniciar sesion=====");	
+	printf("\n>>Ingrese su usuario: ");
 	_flushall();
 	gets(usuario);
 	
-	printf("\nIngrese su contraseña: ");
+	printf("\n>>Ingrese su contraseña: ");
 	_flushall();
 	gets(contra);
 	
@@ -365,23 +421,49 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
 	
 	
 	if(login==true)
-	{
-		printf("\nLogro ingresar correctamente\n");
+	{   printf("\n");
+	    printf("\n>>-------- * --------<<");
+		printf("\n      Bienvenido       ");
+		printf("\n>>-------- * --------<<");
+		printf("\n");
+		printf("\n Logro ingresar correctamente\n");
+		printf("\n");
 		system("pause");
-		printf("\nBienvenido\n\n");
-	
+		
 		do
 		{
-			system("cls");
-			printf("\n Módulo Administracion\n");
-		 	printf("\n =========================\n");
-		 	printf("\n 1.- Registrar Veterinario\n");
-		 	printf("\n 2.- Registrar Usuario Asistente\n");
-		 	printf("\n 3.- Atenciones por Veterinarios\n");
-			printf("\n 4.- Ranking de Veterinarios por Atenciones\n");
-		 	printf("\n 5.- Volver al menu anterior.\n");
-		 	printf("\n Ingrese una opción: ");
-			 scanf("%d", &opcion);
+system("cls");
+printf("\n**********************************************************************");	
+printf("\n**********************************************************************");
+printf("\n**                                                                  **");
+printf("\n**                                                                  **");	
+printf("\n**                  Módulo Administracion                           **");
+printf("\n**                =========================                         **");
+printf("\n**                1> Registrar Veterinario                          **");
+printf("\n**                2> Registrar Usuario Asistente                    **");
+printf("\n**                3> Atenciones por Veterinarios                    **");
+printf("\n**                4> Ranking de Veterinarios por Atenciones         **");
+printf("\n**                5> Volver al menu anterior                        **");
+printf("\n**                                                                  **");
+printf("\n**                                                                  **");
+printf("\n**                                                                  **");
+printf("\n**                                                                  **");
+printf("\n**                                                                  **");
+printf("\n**                                                                  **");
+printf("\n**                                                                  **");
+printf("\n**                                                                  **");
+printf("\n**                                                                  **");
+printf("\n**                                                                  **");
+printf("\n**                                                                  **");
+printf("\n**                                                                  **");
+printf("\n**                                                                  **");
+printf("\n**                                                                  **");
+printf("\n**                                                                  **");
+printf("\n**                                                                  **");               
+printf("\n**********************************************************************");    
+printf("\n**********************************************************************");	
+printf("\n Ingrese una opcion: ");
+scanf("%d", &opcion);
 			 switch(opcion)
 			 {
 			 	case 1: regvet(altaveterinarios,admi); 
@@ -412,7 +494,9 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
 			 	
 			 	
 			 	default:
-				printf("Ingreso una opcion incorrecta, ingrese nuevamente");
+			 	printf("\n");
+				printf("\nERROR  - Ingreso una opcion incorrecta, ingrese nuevamente -  ERROR");
+				printf("\n\n");
 				break;
 			 		
 			 }
@@ -421,7 +505,10 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
 	}
 	else
 	{
-		printf("\n\nIngreso mal su usuario o contraseña, vuelva a intentarlo\n");
+		printf("\n-------------------------- * --------------------------");
+		printf("\nIngreso mal su usuario o contraseña, intente nuevamente");
+		printf("\n-------------------------- * --------------------------");
+		printf("\n\n");
 	}
 	fclose(altaveterinarios);
 
@@ -437,19 +524,22 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
 	do{
 		bool repeticion=false;
 		int digito=0,mayus=0,c=0;
-		
-		printf("\nEl usuario del veterinario debe:\nContener entre 6 y 10 caracteres\ncomenzar con una letra minuscula\nTener al menos 2 letras mayusculas\nTener como maximo 3 digitos");
-		printf("\n\nIngrese usuario del veterinario: ");
+		system("cls");
+		printf("\n");
+		printf("\n------------- * -------------");
+		printf("\nEl usuario del veterinario debe:\n-Contener entre 6 y 10 caracteres\n-Comenzar con una letra minuscula\n-Tener al menos 2 letras mayusculas\n-Tener como maximo 3 digitos");
+		printf("\n------------- * -------------");
+		printf("\n\n>>Ingrese usuario del veterinario: ");
 		_flushall();
 		gets(admi.usuario);
 		
-		printf("\n");
-		printf(">>Ingreso: ");
-		puts(admi.usuario);
+	//	printf("\n");
+	//	printf("--Ingreso: ");
+	//	puts(admi.usuario);
 		
 		
 		longitud = strlen(admi.usuario);
-		printf("\n>>Tiene %d longitud",longitud);
+	//	printf("\n--Tiene %d longitud",longitud);
 		
 		for(int i=0;i<=longitud;i++)
 		{
@@ -465,8 +555,8 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
 			i++;
      	}
      	
-     	printf("\n>>Tiene %d digitos y %d mayusculas",digito,mayus);
-		printf("\n>>Primer caracter %c",aux[0]);
+     //	printf("\n--Tiene %d digitos y %d mayusculas",digito,mayus);
+	//	printf("\n--Primer caracter %c",aux[0]);
 		
 		rewind(altaveterinarios);
 		fread(&admi.usuario,sizeof(admi),1,altaveterinarios);
@@ -479,7 +569,9 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
 			if (repite==0)
 			{
 				repeticion=true;
-				printf("\n>>El nombre de usuario ingresado, ya esta registrado");
+				printf("\n");
+				printf("\nERROR  - El nombre de usuario ingresado, ya esta registrado -  ERROR");
+				printf("\n");
 				break;
 			}
 			
@@ -497,9 +589,9 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
 				}
 			else
 				{
-					
-					printf("\n\nNo cumple alguna condicion, intente nuevamente");
-					printf("\n=====================================================\n");
+					printf("\n----------------------- * -----------------------");
+					printf("\n  No cumple alguna condicion, ingrese nuevamente ");
+					printf("\n----------------------- * -----------------------");
 					printf("\nSi desea salir presione 1, si quiere volver a intentar presione otra tecla: ");
 					scanf("%d", &c);
 					if(c==1)
@@ -512,22 +604,24 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
 			    }
 	}while(error!=true);
 		
-		printf("\n\nSe registro correctamente,continuemos con la contraseña\n");
-		system("pause");
-		system("cls");			
+		printf("\n\nSe registro correctamente,continuemos con la contraseña....\n\n");
+		system("pause");			
 	
 	
 		do
 		{
 			int digitcon=0,maycon=0,caracterespecial=0,longitudcontra=0,mincon=0,c=0;
 			bool consecutivo=false;
-			printf ("\nLa contraseña del veterinario: \nDebe contener al menos una letra mayuscula, una minuscula y un numero\nNo puede contener caracteres especiales\nDebe tener entre 6 y 10 caracteres\nNo debe tener mas de 3 numeros consecutivos\nNo debe tener 2 letras consecutivas");
-			printf ("\n\nElija una contraseña: ");
+			printf("\n");
+			printf("\n------------- * -------------");
+			printf ("\nLa contraseña del veterinario debe tener: \n-Al menos una letra mayuscula, una minuscula y un numero\n-No puede contener caracteres especiales\n-Debe tener entre 6 y 10 caracteres\n-No debe tener mas de 3 numeros consecutivos\n-No debe tener 2 letras consecutivas");
+			printf("\n------------- * -------------");
+			printf ("\n\n>>Elija una contraseña: ");
 			_flushall();
 			gets(admi.contra);
 			
-			printf("\nLO INGRESADO FUE:");
-			puts(admi.contra);
+	//		printf("\n-Lo ingresado fue:");
+	//		puts(admi.contra);
 			longitudcontra = strlen(admi.contra);
 			for(int j=0;j<=longitudcontra;j++)
 			{
@@ -559,7 +653,8 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
 						if(auxnova+1==auxcontra[j+1])
 						{
 							consecutivo=true;
-							printf("No debe tener dos caracteres consecutivos");
+							printf("\nERROR  - No debe tener dos caracteres consecutivos -  ERROR");
+							printf("\n");
 							break;
 						}
 					}
@@ -574,7 +669,8 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
 							if(auxnova+2==auxcontra[j+2])
 							{
 								consecutivo=true;
-								printf("No debe tener 3 caracteres numericos");
+								printf("\nERROR  - No debe tener 3 caracteres numericos -  ERROR");
+								printf("\n");
 								break;
 							}
 						}
@@ -582,23 +678,26 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
 				}	
 			 }	
 	
-		printf("\n>>El numero digitos es %d, el numero de mayus es %d",digitcon,maycon);	
-		printf("\n>>El numero minus es %d",mincon);	
-		printf("\n>>El numero de caracteres especiales es %d",caracterespecial);
-		printf("\n>>La longitud es %d",longitudcontra );
+	//	printf("\n--El numero digitos es %d, el numero de mayus es %d",digitcon,maycon);	
+	//	printf("\n--El numero minus es %d",mincon);	
+	//	printf("\n--El numero de caracteres especiales es %d",caracterespecial);
+	//	printf("\n--La longitud es %d",longitudcontra );
 		
 		if((consecutivo==false)&&(digitcon>0)&&(maycon>0)&&(mincon>0)&&(caracterespecial==0)&&(longitudcontra>5)&&(longitudcontra<11))
 		{contrase=true;}
 		else
 		{
 				
-					printf("\n\nNo cumple alguna condicion, ingrese su nueva contraseña\n");
-					printf("\n=====================================================\n");	
+					printf("\n----------------------- * -----------------------");
+					printf("\n  No cumple alguna condicion, ingrese nuevamente ");
+					printf("\n----------------------- * -----------------------");	
 					printf("\nSi desea salir presione 1, si quiere volver a intentar presione otra tecla: ");
 					scanf("%d", &c);
 					if(c==1)
 					{
+						printf("\n");
 						fclose(altaveterinarios);
+						printf("\n");
 						return;
 					}
 					system("cls");
@@ -606,16 +705,16 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
 		}
 		}while(contrase!=true);
 		
-		printf("\n\nIngrese el Nombre y apellido del profesional: ");
+		printf("\n>>Ingrese el Nombre y apellido del profesional: ");
 		_flushall();
 		gets(admi.Apenom);
 		
-		printf("\n\nIngrese Matricula del profesional: ");
+		printf("\n>>Ingrese Matricula del profesional: ");
 		scanf("%d", &admi.matricula);
 		
 		fwrite(&admi,sizeof(admi),1,altaveterinarios);//esto escribe el usuario en el archivo
 		
-		printf("\n\nSu usuario fue registrado satisfactoriamente\n");
+		printf("\n\nSu usuario fue registrado satisfactoriamente!!!!\n");
 		
 	    fclose(altaveterinarios);
 	
@@ -634,19 +733,22 @@ void regrecepcionista(FILE*altaveterinarios,Usuarios admi)
 	do{
 		bool repeticion=false;
 		int digito=0,mayus=0,c=0;
-		
-		printf("\nEl usuario del recepcionista debe:\nContener entre 6 y 10 caracteres\ncomenzar con una letra minuscula\nTener al menos 2 letras mayusculas\nTener como maximo 3 digitos");
-		printf("\n\nIngrese usuario del recepcionista: ");
+		system("cls");
+		printf("\n");
+	    printf("\n------------- * -------------");
+		printf("\nEl usuario del recepcionista debe:\n-Contener entre 6 y 10 caracteres\n-Comenzar con una letra minuscula\n-Tener al menos 2 letras mayusculas\n-Tener como maximo 3 digitos");
+		printf("\n------------- * -------------");
+		printf("\n\n>>Ingrese usuario del recepcionista: ");
 		_flushall();
 		gets(admi.usuario);
 		
-		printf("\n");
-		printf(">>Ingreso: ");
-		puts(admi.usuario);
+	//	printf("\n");
+	//	printf("--Ingreso: ");
+	//	puts(admi.usuario);
 		
 		
 		longitud = strlen(admi.usuario);
-		printf("\n>>Tiene %d longitud",longitud);
+	//	printf("\n--Tiene %d longitud",longitud);
 		
 		for(int i=0;i<=longitud;i++)
 		{
@@ -662,8 +764,8 @@ void regrecepcionista(FILE*altaveterinarios,Usuarios admi)
 			i++;
      	}
      	
-     	printf("\n>>Tiene %d digitos y %d mayusculas",digito,mayus);
-		printf("\n>>Primer caracter %c",aux[0]);
+     //	printf("\n--Tiene %d digitos y %d mayusculas",digito,mayus);
+	//	printf("\n--Primer caracter %c",aux[0]);
 		
 		rewind(altaveterinarios);
 		fread(&admi,sizeof(char),1,altaveterinarios);
@@ -675,7 +777,8 @@ void regrecepcionista(FILE*altaveterinarios,Usuarios admi)
 			if (repite==0)
 			{
 				repeticion=true;
-				printf("\n>>El nombre de usuario ingresado, ya esta registrado");
+				printf("\nERROR  - El nombre de usuario ingresado, ya esta registrado -  ERROR");
+				printf("\n");
 				break;
 			}
 			
@@ -694,13 +797,16 @@ void regrecepcionista(FILE*altaveterinarios,Usuarios admi)
 			else
 				{
 					
-					printf("\n\nNo cumple alguna condicion");
-					printf("\n=====================================================\n");
+					printf("\n----------------------- * -----------------------");
+					printf("\n  No cumple alguna condicion, ingrese nuevamente ");
+					printf("\n----------------------- * -----------------------");
 					printf("\nSi desea salir presione 1, si quiere volver a intentar presione otra tecla: ");
 					scanf("%d", &c);
 					if(c==1)
 					{
+						printf("\n");
 						fclose(altaveterinarios);
+						printf("\n");
 						return;
 					}
 					system("cls");
@@ -709,22 +815,24 @@ void regrecepcionista(FILE*altaveterinarios,Usuarios admi)
 			    
 	}while(error!=true);
 		
-		printf("\n\nSe registro correctamente,continuemos con la contraseña\n");
-		system("pause");
-		system("cls");			
+		printf("\n\nSe registro correctamente,continuemos con la contraseña...\n");
+		system("pause");			
 	
 	
 		do
 		{
 			int digitcon=0,maycon=0,caracterespecial=0,longitudcontra=0,mincon=0,c=0;
 			bool consecutivo=false;
-			printf ("\nLa contraseña del recepcionista: \nDebe contener al menos una letra mayuscula, una minuscula y un numero\nNo puede contener caracteres especiales\nDebe tener entre 6 y 10 caracteres\nNo debe tener mas de 3 numeros consecutivos\nNo debe tener 2 letras consecutivas");
-			printf ("\n\nElija una contraseña: ");
+					printf("\n");
+	        printf("\n------------- * -------------");
+			printf ("\nLa contraseña del recepcionista debe: \n-Tener al menos una letra mayuscula, una minuscula y un numero\n-No puede contener caracteres especiales\n-Debe tener entre 6 y 10 caracteres\n-No debe tener mas de 3 numeros consecutivos\n-No debe tener 2 letras consecutivas"); 
+	        printf("\n------------- * -------------");
+			printf ("\n\n>>Elija una contraseña: ");
 			_flushall();
 			gets(admi.contra);
 			
-			printf("\nLO INGRESADO FUE:");
-			puts(admi.contra);
+	//		printf("\n--Lo ingresado fue: ");
+	//		puts(admi.contra);
 			longitudcontra = strlen(admi.contra);
 			for(int j=0;j<=longitudcontra;j++)
 			{
@@ -756,7 +864,8 @@ void regrecepcionista(FILE*altaveterinarios,Usuarios admi)
 						if(auxnova+1==auxcontra[j+1])
 						{
 							consecutivo=true;
-							printf("No debe tener dos caracteres consecutivos");
+							printf("\nERROR  - No debe tener dos caracteres consecutivos - ERROR");
+							printf("\n");
 							break;
 						}
 					}
@@ -771,7 +880,8 @@ void regrecepcionista(FILE*altaveterinarios,Usuarios admi)
 							if(auxnova+2==auxcontra[j+2])
 							{
 								consecutivo=true;
-								printf("No debe tener 3 caracteres numericos");
+								printf("\nERROR  - No debe tener 3 caracteres numericos -  ERROR");
+								printf("\n");
 								break;
 							}
 						}
@@ -779,37 +889,40 @@ void regrecepcionista(FILE*altaveterinarios,Usuarios admi)
 				}	
 			 }	
 	
-		printf("\n>>El numero digitos es %d, el numero de mayus es %d",digitcon,maycon);	
-		printf("\n>>El numero minus es %d",mincon);	
-		printf("\n>>El numero de caracteres especiales es %d",caracterespecial);
-		printf("\n>>La longitud es %d",longitudcontra );
+	//	printf("\n--El numero digitos es %d, el numero de mayus es %d",digitcon,maycon);	
+	//	printf("\n--El numero minus es %d",mincon);	
+	//	printf("\n--El numero de caracteres especiales es %d",caracterespecial);
+	//	printf("\n--La longitud es %d",longitudcontra );
 		
 		if((consecutivo==false)&&(digitcon>0)&&(maycon>0)&&(mincon>0)&&(caracterespecial==0)&&(longitudcontra>5)&&(longitudcontra<11))
 		{contrase=true;}
 		else
 		{
 				
-					printf("\n\nNo cumple alguna condicion, ingrese su nueva contraseña\n");
-					printf("\n=====================================================\n");	
+					printf("\n----------------------- * -----------------------");
+					printf("\n  No cumple alguna condicion, ingrese nuevamente ");
+					printf("\n----------------------- * -----------------------");	
 					printf("\nSi desea salir presione 1, si quiere volver a intentar presione otra tecla: ");
 					scanf("%d", &c);
 					if(c==1)
 					{
+						printf("\n");
 						fclose(altaveterinarios);
 						return;
+						printf("\n");
 					}
 					system("cls");
 					
 		}
 		}while(contrase!=true);
 		
-		printf("Ingrese el Nombre y apellido del Recepcionista: ");
+		printf("\n>>Ingrese el Nombre y apellido del Recepcionista: ");
 		_flushall();
 		gets(admi.Apenom);
 		
 		fwrite(&admi,sizeof(admi),1,altaveterinarios);//esto escribe el usuario en el archivo
 		
-		printf("\n\nEl usuario del recepcionista fue registrado satisfactoriamente\n");
+		printf("\n\nEl usuario del recepcionista fue registrado satisfactoriamente!!!!\n");
 		
 	    fclose(altaveterinarios);
 	
@@ -826,16 +939,20 @@ void recepcionista(Mascota masc, FILE*altaveterinarios,Usuarios admi,turnos turn
 	altaveterinarios=fopen("Recepcionistas.dat","rb");
 	if (altaveterinarios== NULL)
 	{
-	 printf("\nNo hay recepcionistas registrados");
-	 return;
+	system("cls");
+	printf("\n------------ ATENCION ------------");
+	printf("\n No hay recepcionistas registrados");
+	printf("\n------------ ATENCION ------------");
+	printf("\n");
+	return;
 	}
 	system("cls");
-	
-	printf("\nIngrese su usuario: ");
+	printf("\n=====Iniciar sesion=====");	
+	printf("\n>>Ingrese su usuario: ");
 	_flushall();
 	gets(usuario);
 	
-	printf("\nIngrese su contraseña: ");
+	printf("\n>>Ingrese su contraseña: ");
 	_flushall();
 	gets(contra);
 	
@@ -858,20 +975,45 @@ void recepcionista(Mascota masc, FILE*altaveterinarios,Usuarios admi,turnos turn
 	
 	if(login==true)
 	{
-		system("cls");
-		printf("\nLogro ingresar, bienvenido\n");
+		printf("\nLogro ingresar, bienvenido!!!!\n");
+		printf("\n");	
 		system("pause");
 		do
 		{
-			system("cls");
-			printf("\n	Modulo del Recepcionista\n");
-			printf("\n =========================\n");
-			printf("\n 1.- Registrar Mascota\n");
-			printf("\n 2.- Registrar Turno\n");
-			printf("\n 3.- Listado de Atenciones por Veterinario y Fecha\n");
-			printf("\n 4.- Volver al menu anterior.\n");
-			printf("\n	 Ingrese una opción: ");
-			scanf("%d", &opcion);
+system("cls");			
+printf("\n**********************************************************************");	
+printf("\n**********************************************************************");
+printf("\n**                                                                  **");
+printf("\n**                                                                  **");	
+printf("\n**                 Modulo del Recepcionista                         **");
+printf("\n**                =========================                         **");
+printf("\n**                1> Registrar Mascota                              **");
+printf("\n**                2> Registrar Turno                                **");
+printf("\n**                3> Listado de Atenciones por Veterinario y Fecha  **");
+printf("\n**                4> Volver al menu anterior                        **");
+printf("\n**                                                                  **");
+printf("\n**                                                                  **");
+printf("\n**                                                                  **");
+printf("\n**           @@@@                                       @@@@        **");
+printf("\n**         @@@@@@@@@@                               @@@@@@@@@@      **");    
+printf("\n**         @@@@@@@@@@@@@@                        @@@@@@@@@@@@@@     **");      
+printf("\n**        @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@     **"); 
+printf("\n**         @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@      **");
+printf("\n**          @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@      **");           
+printf("\n**           @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@       **");
+printf("\n**            @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@        **");
+printf("\n**          @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@      **");
+printf("\n**         @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@     **");
+printf("\n**         @@@@@@@@@@@@@@@@@@@@@@@@   @@@@@@@@@@@@@@@@@@@@@@@@@     **");
+printf("\n**       @@@@@@@@@@@     @@@@@@@@@     @@@@@@@      @@@@@@@@@@@     **");
+printf("\n**      @@@@@@@@@@       @@@@@@@@       @@@@@@        @@@@@@@@@@    **");
+printf("\n**      @@@@@@@@@@@@     @@@@@@          @@@@@@     @@@@@@@@@@@@@   **");
+printf("\n**      @@@@@@@@@@@@@@@@@@@@@@   @@@@@@    @@@@@@@@@@@@@@@@@@@@@    **");
+printf("\n**       @@@@@@@@@@@@@@@          @@@@             @@@@@@@@@@@@@    **");      
+printf("\n**********************************************************************");    
+printf("\n**********************************************************************");	 
+printf("\n\nIngrese una opcion: ");
+scanf("%d", &opcion);
 			
 			switch(opcion)
 		 {
@@ -898,7 +1040,9 @@ void recepcionista(Mascota masc, FILE*altaveterinarios,Usuarios admi,turnos turn
 		 	
 		 	
 		 	default:
-			printf("Ingreso una opcion incorrecta, ingrese nuevamente");
+			printf("\n");
+			printf("\nERROR  - Ingreso una opcion incorrecta, ingrese nuevamente -  ERROR");
+			printf("\n\n");
 			break;
 		 		
 		 }
@@ -907,7 +1051,10 @@ void recepcionista(Mascota masc, FILE*altaveterinarios,Usuarios admi,turnos turn
 }	
 else
 {
-	printf("\n\nIngreso mal su usuario o contraseña, vuelva a intentarlo\n");
+		printf("\n-------------------------- * --------------------------");
+		printf("\nIngreso mal su usuario o contraseña, intente nuevamente");
+		printf("\n-------------------------- * --------------------------");
+		printf("\n\n");
 }	
 	fclose(altaveterinarios);
 	
@@ -924,7 +1071,9 @@ void regmascota(Mascota masc, FILE*altaveterinarios)
 	do
 	{
 	bool repite=false;
-	printf("\nIngrese el nombre y apellido de la mascota (apellido de familia): ");
+	system("cls");
+	printf("\n======Registro de la mascota======");
+	printf("\n>>Ingrese el nombre y apellido de la mascota (apellido de familia): ");
 	_flushall();
 	gets(masc.apenom);
 	strlwr(masc.apenom);
@@ -936,7 +1085,7 @@ void regmascota(Mascota masc, FILE*altaveterinarios)
 			aux[i]=masc.apenom[i];
 		}
 	
-	printf("\nDNI del dueño: ");
+	printf("\n>>DNI del dueño: ");
 	scanf("%d", &masc.Dni_due);
 	aux2=masc.Dni_due;
 	
@@ -973,23 +1122,23 @@ void regmascota(Mascota masc, FILE*altaveterinarios)
 	
 	if(repite!=true)
 	{
-	printf("\nDomicilio del dueño: ");
+	printf("\n>>Domicilio del dueño: ");
 	_flushall();
 	gets(masc.domicilio);
 	
-	printf("\nLocalidad: ");
+	printf("\n>>Localidad: ");
 	_flushall();
 	gets(masc.localidad);
 	
-	printf("\nFecha de nacimiento de la mascota:");
-        printf("\nDia: ");
+	printf("\n--Fecha de nacimiento de la mascota:");
+        printf("\n>>Dia: ");
         scanf("%d",&masc.FechaNac.dia);
-        printf("\nMes: ");
+        printf("\n>>Mes: ");
         scanf("%d",&masc.FechaNac.mes);
-        printf("\nAnio: ");
+        printf("\n>>Anio: ");
         scanf("%d",&masc.FechaNac.year);
         
-    printf("\nTelefono del dueño: ");
+    printf("\n>>Telefono del dueño: ");
 	_flushall();
 	gets(masc.telefono);	
 	}
@@ -1017,17 +1166,21 @@ auxiliarvet=fopen("Veterinarios.dat","rb");
 altaveterinarios=fopen("Mascotas.dat","rb");	
 if (altaveterinarios== NULL)
 {
- printf("\nNo hay mascotas registradas");
+	system("cls");
+    printf("\n------------ ATENCION ------------");
+    printf("\n    No hay mascotas registradas   ");
+    printf("\n------------ ATENCION ------------");
+    printf("\n");
   	fclose(auxiliarvet);	
  	fclose(altaveterinarios);
  return;
 }
 system("cls");
-printf("\n\n\n");
-printf("\n\t\t********************************************************");
-printf("\n\t\t**            LISTADO   DE   MASCOTAS                 **");
-printf("\n\t\t********************************************************");
-printf("\n\n\n");
+printf("\n");
+printf("\n************************************************************************");
+printf("\n**                      LISTADO   DE   MASCOTAS                       **");
+printf("\n************************************************************************");
+printf("\n\n");
 	
 rewind(altaveterinarios); 
 fread(&masc,sizeof(masc),1,altaveterinarios);
@@ -1038,23 +1191,17 @@ fread(&masc,sizeof(masc),1,altaveterinarios);
  printf("\n");
  fread(&masc,sizeof(masc),1,altaveterinarios);
  }
- //fclose(altaveterinarios);
- 
-	/*int Matriculavet;
-	fechaT fechaturno;
-	int Dni_due;
-	char evolucion[380];*/
 	
 turnosok=fopen("Turnos.dat","a+b");
 
-printf("\n Ingrese fecha del turno: ");
-        printf("\nDia: ");
+printf("\n--Ingrese fecha del turno: ");
+        printf("\n>>Dia: ");
         scanf("%d",&turnos_ok.fechaturno.dia);
         dia=turnos_ok.fechaturno.dia;
-        printf("\nMes: ");
+        printf("\n>>Mes: ");
         scanf("%d",&turnos_ok.fechaturno.mes);
         mes=turnos_ok.fechaturno.mes;
-        printf("\nAnio: ");
+        printf("\n>>Anio: ");
         scanf("%d",&turnos_ok.fechaturno.year);
         year=turnos_ok.fechaturno.year;
         
@@ -1074,7 +1221,9 @@ printf("\n Ingrese fecha del turno: ");
 	}   
 	if(repiteturno>1)
 	{
-		printf("Error no se puede registrar mas de 2 turnos por dia\n");
+		printf("\n");
+		printf("ERROR  - No se puede registrar mas de 2 turnos por dia -  ERROR");
+		printf("\n");
 		fclose(auxiliarvet);	
 	 	fclose(altaveterinarios);
 	 	fclose(turnosok);
@@ -1084,7 +1233,7 @@ printf("\n Ingrese fecha del turno: ");
 	turnos_ok.fechaturno.mes=mes;
 	turnos_ok.fechaturno.year=year;
 	
-printf("\n Ingrese Matricula del veterinario: ");
+printf("\n>>Ingrese Matricula del veterinario: ");
 scanf("%d",&Matricula);
 
 	rewind(auxiliarvet);
@@ -1104,7 +1253,7 @@ scanf("%d",&Matricula);
 	}   
  if(existe==false)
  {
- 	printf("\nLa matricula no existe");
+ 	printf("\nERROR  - La matricula no existe - ERROR\n\n");
  	fclose(auxiliarvet);	
  	fclose(altaveterinarios);
  	fclose(turnosok);
@@ -1113,7 +1262,7 @@ scanf("%d",&Matricula);
 
 //IF QUE TRABAJE EN CASO DE QUE EXISTA
 
-printf("\n Ingrese DNI del dueño: ");
+printf("\n>>Ingrese DNI del dueño: ");
 scanf("%d",&DNI);
 	
 	rewind(altaveterinarios);
@@ -1135,14 +1284,14 @@ scanf("%d",&DNI);
 		}   
 		 if(existe2==false)
 		 {
-		 	printf("\nEl dni no existe\n");
+		 	printf("\nERROR  - El dni no existe -  ERROR\n\n");
 		 	fclose(auxiliarvet);	
  			fclose(altaveterinarios);
  			fclose(turnosok);
 		 	return;
 		 }
 		 
-printf("\n Ingrese Nombre y apellido de la mascota: ");
+printf("\n>>Ingrese Nombre y apellido de la mascota: ");
 _flushall();
 gets(nombrem);
 strlwr(nombrem);
@@ -1166,7 +1315,7 @@ strlwr(nombrem);
 	}   
 	if(repite==false)
 	{
-			printf("\nLa mascota no esta registrada\n");
+			printf("\nERROR  - La mascota no esta registrada -  ERROR\n\n");
 			fclose(auxiliarvet);	
  			fclose(altaveterinarios);
  			fclose(turnosok);
@@ -1181,7 +1330,7 @@ strlwr(nombrem);
 	
 
 
-printf("\nEvolucion: ");
+printf("\n>>Evolucion: ");
 puts(masc.evolucion);
 
 fwrite(&turnos_ok,sizeof(turnos_ok),1,turnosok);
@@ -1203,17 +1352,20 @@ void atencionvet(Mascota masc, FILE*altaveterinarios,Usuarios admi,FILE *turnoso
 	
 	if (altaveterinarios== NULL)
 	{
-	 printf("\nNo hay Veterinarios registrados");
+	system("cls");
+    printf("\n------------ ATENCION ------------");
+	printf("\n  No hay Veterinarios registrados ");
+    printf("\n------------ ATENCION ------------");
 	 return;
 	}
 	
 	system("cls");
-	
-	printf("\nIngrese su usuario: ");
+	printf("=====Iniciar sesion=====");
+	printf("\n>>Ingrese su usuario: ");
 	_flushall();
 	gets(usuario);
 	
-	printf("\nIngrese su contraseña: ");
+	printf("\n>>Ingrese su contraseña: ");
 	_flushall();
 	gets(contra);
 	
@@ -1236,20 +1388,45 @@ void atencionvet(Mascota masc, FILE*altaveterinarios,Usuarios admi,FILE *turnoso
 	
 	if(login==true)
 	{
-		system("cls");
 		printf("\nLogro ingresar, bienvenido\n");
+		printf("\n\n");
+		system("pause");
 		do
 		{
-				printf("\nModulo Consultorio Veterinario\n");
-				printf("\n =========================\n");
-				printf("\n 1.- Visualizar Lista de Espera de Turnos (informe)\n");
-				printf("\n 2.- Registrar Evolución de la Mascota\n");
-				printf("\n 3.- Volver al menu anterior.\n");
-				printf("\n Ingrese una opción: ");
-				scanf("%d",&opcion);
-				
-		
-			
+system("cls");		
+printf("\n**********************************************************************");	
+printf("\n**********************************************************************");	
+printf("\n**                                                                  **");
+printf("\n**                                                                  **");
+printf("\n**              Modulo Consultorio Veterinario                      **");
+printf("\n**              ==============================                      **");
+printf("\n**        1> Visualizar Lista de Espera de Turnos (informe)         **");
+printf("\n**        2> Registrar Evolucion de la Mascota                      **");
+printf("\n**        3> Volver al menu anterior                                **");   
+printf("\n**                                                                  **");
+printf("\n**                                                                  **");
+printf("\n**                                                                  **");
+printf("\n**                                                                  **");
+printf("\n**                                                                  **");
+printf("\n**                                                                  **");
+printf("\n**                                                                  **");
+printf("\n**          @@@@@@@@@@                         @@@@@@@@@@           **");     
+printf("\n**        @@@@@@@@@@@@@@                     @@@@@@@@@@@@@@         **");     
+printf("\n**       @@@@@@@@@@@@@@@@                  @@@@@@@@@@@@@@@@@        **");     
+printf("\n**        @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@        **");     
+printf("\n**        @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@         **");   
+printf("\n**          @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@           **");   
+printf("\n**        @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@         **");     
+printf("\n**       @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@        **");     
+printf("\n**       @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@        **");     
+printf("\n**        @@@@@@@@@@@@@@@                   @@@@@@@@@@@@@@@         **");   
+printf("\n**          @@@@@@@@@@@@                       @@@@@@@@@@@@         **");      
+printf("\n**              @@@@@                             @@@@@             **");
+printf("\n**********************************************************************");
+printf("\n**********************************************************************");    
+printf("\n\nIngrese una opcion: "); 
+scanf("%d",&opcion);
+							
 			switch(opcion)
 		 {
 		 	
@@ -1264,13 +1441,12 @@ void atencionvet(Mascota masc, FILE*altaveterinarios,Usuarios admi,FILE *turnoso
 		 	break;
 		 	
 		 	case 3:	printf("\nGracias por utilizar nuestros servicios.\n");
-		 	
-		 
 		 	break;
 		 	
-		
 		 	default:
-			printf("Ingreso una opcion incorrecta, ingrese nuevamente");
+			printf("\n");
+			printf("\nERROR  - Ingreso una opcion incorrecta, ingrese nuevamente -  ERROR");
+			printf("\n\n");
 			break;
 		 		
 		 }
@@ -1279,7 +1455,10 @@ void atencionvet(Mascota masc, FILE*altaveterinarios,Usuarios admi,FILE *turnoso
 	}
 	else
 	{
-		printf("\n\nIngreso mal su usuario o contraseña, vuelva a intentarlo\n");
+		printf("\n-------------------------- * --------------------------");
+		printf("\nIngreso mal su usuario o contraseña, intente nuevamente");
+		printf("\n-------------------------- * --------------------------");
+		printf("\n\n");
 	}	
 		fclose(altaveterinarios);
 		
@@ -1296,10 +1475,10 @@ void espera_mascota(turnos turnos_ok,FILE *turnosok,FILE*altaveterinarios, Usuar
 	altaveterinarios=fopen("Veterinarios.dat","rb");
 	
 	system("cls");
-	
-	printf("Ingrese su matricula: ");
+	printf("\n=====Ver Turnos====");
+	printf("\n>>Ingrese su matricula: ");
 	scanf("%d", &openmat);
-	printf("\nIngrese su contraseña: ");
+	printf("\n>>Ingrese su contraseña: ");
 	_flushall();
 	gets(contra);
 	
@@ -1321,15 +1500,20 @@ void espera_mascota(turnos turnos_ok,FILE *turnosok,FILE*altaveterinarios, Usuar
 	
 	 if(acceso==false)
 		 {
-		 	printf("\nContraseña o matricula incorrecta\n");
-		 	fclose(altaveterinarios);
+		printf("\n--------------------------- * ---------------------------");
+		printf("\nIngreso mal su contraseña o matricula, intente nuevamente");
+		printf("\n--------------------------- * ---------------------------");
+		printf("\n\n");
+		fclose(altaveterinarios);
 		 	return;
 		 }
 		 
-	 printf("Logro ingresar correctamente\n");
+	 printf("\nLogro ingresar correctamente!!!!\n\n\n");
+	 system("pause");
+	 system("cls");
 	 
 	turnosok=fopen("Turnos.dat","rb");
-	
+	printf("\n=====Ver Turnos====");
 	rewind(turnosok);
 	fread(&turnos_ok,sizeof(turnos_ok),1,turnosok);
     
@@ -1337,7 +1521,6 @@ void espera_mascota(turnos turnos_ok,FILE *turnosok,FILE*altaveterinarios, Usuar
 	{
 		if(openmat==turnos_ok.Matriculavet)
 		{
-			
 			printf("\nMascota: %s",turnos_ok.apenom);
 			printf("\nDia: %d",turnos_ok.fechaturno.dia);
 			printf("\nMes: %d",turnos_ok.fechaturno.mes);
@@ -1364,10 +1547,10 @@ void evolucionmascota(turnos turnos_ok,FILE *turnosok,FILE*altaveterinarios, Usu
 	altaveterinarios=fopen("Veterinarios.dat","rb");
 	
 	system("cls");
-	
-	printf("Ingrese su matricula: ");
+	printf("\n====Evolucion Mascota====");
+	printf("\>>Ingrese su matricula: ");
 	scanf("%d", &openmat);
-	printf("\nIngrese su contraseña: ");
+	printf("\n>>Ingrese su contraseña: ");
 	_flushall();
 	gets(contra);
 	
@@ -1389,12 +1572,17 @@ void evolucionmascota(turnos turnos_ok,FILE *turnosok,FILE*altaveterinarios, Usu
 	
 	 if(acceso==false)
 		 {
-		 	printf("\nContraseña o matricula incorrecta\n");
+		printf("\n--------------------------- * ---------------------------");
+		printf("\nIngreso mal su contraseña o matricula, intente nuevamente");
+		printf("\n--------------------------- * ---------------------------");
+		printf("\n\n");
 		 	fclose(altaveterinarios);
 		 	return;
 		 }
 		 
-	printf("Logro ingresar correctamente\n");
+	printf("\nLogro ingresar correctamente!!!!\n\n\n");
+	system("pause");
+	system("cls");
 	fclose(altaveterinarios);	 
 	
 	
@@ -1408,7 +1596,7 @@ void evolucionmascota(turnos turnos_ok,FILE *turnosok,FILE*altaveterinarios, Usu
 	{
 		if(openmat==turnos_ok.Matriculavet)
 		{
-			printf("\n La matricula esta\n");
+			printf("\nLa matricula esta\n");
 			
 			rewind(altaveterinarios);
 			fread(&masc,sizeof(masc),1,altaveterinarios);
@@ -1423,17 +1611,17 @@ void evolucionmascota(turnos turnos_ok,FILE *turnosok,FILE*altaveterinarios, Usu
 							
 							if (compara==0)
 							{
-								printf("\n Mascota: %s",turnos_ok.apenom);
-								printf("\n Dia: %d",turnos_ok.fechaturno.dia);
-								printf("\n Mes: %d",turnos_ok.fechaturno.mes);
-								printf("\n Anio: %d",turnos_ok.fechaturno.year);
-								printf("\n Este fue el turno de la atencion? \n 1: Si\n 2: No\n ");
+								printf("\n--Mascota: %s",turnos_ok.apenom);
+								printf("\n--Dia: %d",turnos_ok.fechaturno.dia);
+								printf("\n--Mes: %d",turnos_ok.fechaturno.mes);
+								printf("\n--Anio: %d",turnos_ok.fechaturno.year);
+								printf("\n\nEste fue el turno de la atencion? \n 1: Si\n 2: No\n ");
 								scanf("%d", &continuar);
 								system("cls");								
 								
 								if(continuar==1)
 								{
-									printf("\n Ingrese la evolucion de la mascota: ");
+									printf("\n\n>>Ingrese la evolucion de la mascota: ");
 									_flushall();
 									gets(masc.evolucion);
 									

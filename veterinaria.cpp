@@ -97,7 +97,7 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav);
 void recepcionista(Mascota masc, FILE*altaveterinarios,Usuarios admi,turnos turnos_ok,FILE *turnosok);
 void regrecepcionista(FILE*altaveterinarios,Usuarios admi);
 void regmascota(Mascota masc, FILE*altaveterinarios);
-void registrarturno(Mascota masc, FILE*altaveterinarios,turnos turnos_ok,FILE *turnosok);
+void registrarturno(Mascota masc, FILE*altaveterinarios,turnos turnos_ok,FILE *turnosok,Usuarios admi);
 
 void atencionvet(Mascota masc, FILE*altaveterinarios,Usuarios admi,FILE *turnosok);
 void regvet(FILE*altaveterinarios,Usuarios admi); 
@@ -597,13 +597,12 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
 		}
 		}while(contrase!=true);
 		
-		printf("Ingrese el Nombre y apellido del profesional: ");
+		printf("\n\nIngrese el Nombre y apellido del profesional: ");
 		_flushall();
 		gets(admi.Apenom);
 		
-		printf("Ingrese Matricula del profesional: ");
-		_flushall();
-		scanf("%d",admi.matricula);
+		printf("\n\nIngrese Matricula del profesional: ");
+		scanf("%d", &admi.matricula);
 		
 		fwrite(&admi,sizeof(admi),1,altaveterinarios);//esto escribe el usuario en el archivo
 		
@@ -869,7 +868,7 @@ void recepcionista(Mascota masc, FILE*altaveterinarios,Usuarios admi,turnos turn
 		 	system("pause");
 		 	break;
 		 	
-		 	case 2: registrarturno(masc,altaveterinarios,turnos_ok,turnosok);
+		 	case 2: registrarturno(masc,altaveterinarios,turnos_ok,turnosok,admi);
 		 	
 		 		system("pause");
 		 	break;
@@ -1000,9 +999,14 @@ void regmascota(Mascota masc, FILE*altaveterinarios)
 	
 }
 
-void registrarturno(Mascota masc, FILE*altaveterinarios,turnos turnos_ok,FILE *turnosok)
+void registrarturno(Mascota masc, FILE*altaveterinarios,turnos turnos_ok,FILE *turnosok,Usuarios admi)
 {
 FILE *auxiliarvet;
+int Matricula,DNI;
+bool existe=false,existe2=false;
+
+
+
 auxiliarvet=fopen("Veterinarios.dat","rb");
 altaveterinarios=fopen("Mascotas.dat","rb");	
 if (altaveterinarios== NULL)
@@ -1037,13 +1041,13 @@ turnosok=fopen("Turnos.dat","a+b");
 printf("\n Ingrese Matricula del veterinario: ");
 scanf("%d",&Matricula);
 
-	rewind(altaveterinarios);
+	rewind(auxiliarvet);
 	fread(&admi,sizeof(admi),1,auxiliarvet);
     
 	while (!feof(auxiliarvet))
 	{
 
-		if (Matriculavet==admi.matricula)
+		if (Matricula==admi.matricula)
 		{
 			existe=true;
 			turnos_ok.Matriculavet=admi.matricula;
@@ -1063,35 +1067,40 @@ printf("\n Ingrese DNI del dueño: ");
 scanf("%d",&DNI);
 	
 	rewind(altaveterinarios);
-	fread(&masc,sizeof(masc),1,auxiliarvet);
+	fread(&masc,sizeof(masc),1,altaveterinarios);
     
-	while (!feof(auxiliarvet))
-	{
-	
-		if (Matriculavet==admi.matricula)
+		while (!feof(altaveterinarios))
 		{
-			existe=true;
-		}
-	
 		
-		fread(&masc,sizeof(masc),1,auxiliarvet);
-	}   
-	 if(existe==false)
-	 {
-	 	printf("\nLa matricula no existe");
-	 	return;
-	 }
+			if (DNI==masc.Dni_due)
+			{
+				existe2=true;
+				turnos_ok.Dni_due==DNI;
+				printf("\nEL dni existe\n");
+				break;
+			}
+		
+			
+			fread(&masc,sizeof(masc),1,altaveterinarios);
+		}   
+		 if(existe2==false)
+		 {
+		 	printf("\nEl dni no existe\n");
+		 	return;
+		 }
 
 
 printf("\n Ingrese fecha del turno: ");
         printf("\nDia: ");
-        scanf("%d",&turnos_ok.fechaT.dia);
+        scanf("%d",&turnos_ok.fechaturno.dia);
         printf("\nMes: ");
-        scanf("%d",&turnos_ok.fechaT.mes);
+        scanf("%d",&turnos_ok.fechaturno.mes);
         printf("\nAnio: ");
-        scanf("%d",&turnos_ok.fechaT.year);
+        scanf("%d",&turnos_ok.fechaturno.year);
+		        
 
-printf("\nEvolucion: ";);
+
+printf("\nEvolucion: ");
 puts(turnos_ok.evolucion);
 
  fclose(altaveterinarios);

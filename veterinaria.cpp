@@ -1396,12 +1396,11 @@ void listadovet(turnos turnos_ok,FILE *turnosok,FILE*altaveterinarios, Usuarios 
 		{
 			if(dia==infor.fechaturno.dia && mes==infor.fechaturno.mes && year==infor.fechaturno.year)
 			{
-				printf("Nombre: %s",infor.apenomM);
+				printf("\nNombre: %s",infor.apenomM);
 				printf("\n dia: %d", infor.fechaturno.dia);
 				printf("\n mes: %d", infor.fechaturno.mes);
 				printf("\n año: %d", infor.fechaturno.year);
-				
-				printf("\n\n%s\n", infor.evolucion);
+				printf("\n%s\n", infor.evolucion);
 			}
 		}
 		

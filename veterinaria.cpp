@@ -81,11 +81,18 @@ struct info
 	
 };
 
+struct ranking
+{
+	char apenom[60];
+	int n;
+	int matricula;
+		
+};
 
-void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav,info infor,FILE *informes);
+void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav,info infor,FILE *informes,ranking auxmes);
 void regvet(FILE*altaveterinarios,Usuarios admi);
 void regrecepcionista(FILE*altaveterinarios,Usuarios admi);
-void mejorveterinario(info infor,FILE *informes);
+void mejorveterinario(info infor,FILE *informes,FILE*altaveterinarios,Usuarios admi,ranking auxmes);
 
 void recepcionista(Mascota masc, FILE*altaveterinarios,Usuarios admi,turnos turnos_ok,FILE *turnosok,info infor,FILE *informes);
 void regmascota(Mascota masc, FILE*altaveterinarios);
@@ -96,6 +103,7 @@ void atencionvet(Mascota masc, FILE*altaveterinarios,Usuarios admi,FILE *turnoso
 void espera_mascota(turnos turnos_ok,FILE *turnosok,FILE*altaveterinarios, Usuarios admi);
 void evolucionmascota(turnos turnos_ok,FILE *turnosok,FILE*altaveterinarios, Usuarios admi,Mascota masc,info infor,FILE *informes);
  
+ 
 //============================================================PRINCIPAL============================================================
 using namespace std;
 main()
@@ -103,6 +111,7 @@ main()
 	setlocale(LC_ALL, "spanish");
 	system("color F0");
 	int opcion	;
+	ranking auxmes;
 	Usuarios admi;
 	info infor;
 	Mascota masc;
@@ -148,7 +157,7 @@ scanf("%d", &opcion);
 	
  	switch(opcion)
 	 {
-	 	case 1: administracion(admi,altaveterinarios,altav,infor,informes);
+	 	case 1: administracion(admi,altaveterinarios,altav,infor,informes,auxmes);
 	 	
 	 	system("pause");
 	 	break;
@@ -197,7 +206,7 @@ system("pause");
 }
 
 //============================================================ADMINISTRACION=======================================================	
-void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav,info infor,FILE *informes)
+void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav,info infor,FILE *informes,ranking auxmes)
 {	
 	char usuario[10], contra[10],aux[10],auxcontra[10];
 	bool login=false,error=false,contrase=false;
@@ -474,12 +483,12 @@ scanf("%d", &opcion);
 			 	break;
 			 	
 			 	case 3: //atencionvet();
-			 		printf("3.- Atenciones por Veterinarios\n");
-			 		system("pause");
+			 	printf("3.- Atenciones por Veterinarios\n");
+			 	system("pause");
 			 	break;
 			 	
-			 	case 4: mejorveterinario(infor,informes);
-			 	printf("4.- Ranking de Veterinarios por Atenciones\n");
+			 	case 4: 
+				mejorveterinario(infor,informes,altaveterinarios,admi,auxmes);
 			 	system("pause");
 			 	break;
 			 	
@@ -925,60 +934,94 @@ void regrecepcionista(FILE*altaveterinarios,Usuarios admi)
 	
 }
 
-void mejorveterinario(info infor,FILE *informes)
+void mejorveterinario(info infor,FILE *informes,FILE*altaveterinarios,Usuarios admi,ranking auxmes)
 {
+	int year,mes,longitud;
+	FILE *mejordelmes;
+	altaveterinarios=fopen("Veterinarios.dat","rb");
+	mejordelmes=fopen("Auxmes.dat","w+b");
 	informes=fopen("informacion.dat","rb");
-	bool comprobar;
-	int enero=0, febrero=0,marzo=0,abril=0,mayo=0,junio=0,julio=0,agosto=0,septiembre=0,octubre=0,noviembre=0,diciembre=0;
-	rewind(informes);
-	fread(&infor,sizeof(infor),1,informes);
-	
-  	while (!feof(informes))
-	{
-		switch(infor.fechaturno.mes)
-		{
-				case 1: enero++;
-				break;
-				case 2: febrero++;
-				break;
-				case 3:marzo++;
-				break;
-				case 4:abril++;
-				break;
-				case 5:mayo++;
-				break;
-				case 6:junio++;
-				break;
-				case 7:julio++;
-				break;
-				case 8:agosto++;
-				break;
-				case 9:septiembre++;
-				break;
-				case 10:octubre++;
-				break;
-				case 11:noviembre++;
-				break;
-				case 12:diciembre++;
-				break;
-		}
-		
-	   fread(&infor,sizeof(infor),1,informes);
-	}
-	fclose(informes);
-	printf("\nEl valor de enero es --> %d", enero);
-		printf("\nEl valor de febrero es --> %d", febrero);
-			printf("\nEl valor de marzo es --> %d", marzo);
-				printf("\nEl valor de abril es --> %d", abril);
-					printf("\nEl valor de mayo es --> %d", mayo);
-						printf("\nEl valor de junio es --> %d", junio);
-							printf("\nEl valor de julio es --> %d", julio);
-								printf("\nEl valor de agosto es --> %d", agosto);
-									printf("\nEl valor de septiembre es --> %d", septiembre);
-										printf("\nEl valor de octubre es --> %d", octubre);
-											printf("\nEl valor de noviembre es --> %d", noviembre);
-												printf("\nEl valor de diciembre es --> %d", diciembre);
+	int aux;
 
+
+	printf("\n>>Ingrese el año: ");
+	scanf("%d",&year);
+	printf("\n>>Ingrese el mes: ");
+	scanf("%d",&mes);
+	
+	rewind(altaveterinarios);
+	fread(&admi,sizeof(admi),1,altaveterinarios);
+		
+	while (!feof(altaveterinarios))
+	{
+		auxmes.n=0;
+		rewind(informes);
+		fread(&infor,sizeof(infor),1,informes);
+		
+		while (!feof(informes))
+			{
+				if(admi.matricula==infor.matricula)
+				{
+					if(mes==infor.fechaturno.mes && year==infor.fechaturno.year)
+					{
+						auxmes.n++;
+					}
+				}
+				
+			   fread(&infor,sizeof(infor),1,informes);
+			}
+			
+			longitud = strlen(admi.usuario);	
+			for(int i=0;i<=longitud;i++)
+			{
+				auxmes.apenom[i]=admi.usuario[i];
+			}
+			
+			auxmes.matricula=admi.matricula;
+		
+			fwrite(&auxmes,sizeof(auxmes),1,mejordelmes);	
+			fread(&admi,sizeof(admi),1,altaveterinarios);
+		}
+  	
+  	fclose(altaveterinarios);
+	fclose(mejordelmes);
+	fclose(informes);
+	mejordelmes=fopen("Auxmes.dat","rb");
+	
+	rewind(mejordelmes);	
+	fread(&auxmes,sizeof(auxmes),1,mejordelmes);
+	
+	aux=auxmes.n;
+	
+  	while(!feof(mejordelmes))
+  	{
+  		if(auxmes.n>aux)
+  		{
+  			aux=auxmes.n;
+  			
+		}
+	  
+	  fread(&auxmes,sizeof(auxmes),1,mejordelmes);	
+	}
+	
+	
+	rewind(mejordelmes);	
+	fread(&auxmes,sizeof(auxmes),1,mejordelmes);
+	
+  	while(!feof(mejordelmes))
+  	{
+  		if(aux==auxmes.n)
+  		{
+  			printf("\n>> El nombre del veterinario con más atenciones ---> %s",auxmes.apenom);
+  			printf("\n>> Su matricula es ---> %s",auxmes.matricula);
+  			
+		}
+	  
+	  fread(&auxmes,sizeof(auxmes),1,mejordelmes);	
+	}
+	
+ 	fclose(mejordelmes);
+	  
 }
 
 //============================================================RECEPCION============================================================
@@ -1203,7 +1246,7 @@ void regmascota(Mascota masc, FILE*altaveterinarios)
         }while(masc.FechaNac.mes<1 || masc.FechaNac.mes>12);
         do
 		{
-		printf("\n>> Año (ultimas dos cifras): ");
+		printf("\n>> Año (cuatro cifras): ");
 		scanf("%d",&masc.FechaNac.year);
 	    }while(masc.FechaNac.year<1900 || masc.FechaNac.year>2021);
         
@@ -1299,10 +1342,10 @@ printf("\n--Ingrese fecha del turno: ");
 			
 		fread(&turnos_ok,sizeof(turnos_ok),1,turnosok);
 	}   
-	if(repiteturno>1)
+	if(repiteturno>10)
 	{
 		printf("\n");
-		printf("ERROR  - No se puede registrar mas de 2 turnos por dia -  ERROR");
+		printf("ERROR  - No se puede registrar mas de 10 turnos por dia -  ERROR");
 		printf("\n");
 		fclose(auxiliarvet);	
 	 	fclose(altaveterinarios);
@@ -1865,12 +1908,5 @@ void evolucionmascota(turnos turnos_ok,FILE *turnosok,FILE*altaveterinarios, Usu
 	
 }
 
-/*struct info
-{
-	int matricula;
-	char apenomM[60];
-	char evolucion[380];
-	fechaT fechaturno;
-	
-}*/
+
 

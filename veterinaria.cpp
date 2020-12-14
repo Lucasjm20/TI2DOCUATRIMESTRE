@@ -1543,12 +1543,11 @@ void evolucionmascota(turnos turnos_ok,FILE *turnosok,FILE*altaveterinarios, Usu
 	bool acceso=false;
 	char contra[10];
 	
-		 
 	altaveterinarios=fopen("Veterinarios.dat","rb");
 	
 	system("cls");
 	printf("\n====Evolucion Mascota====");
-	printf("\>>Ingrese su matricula: ");
+	printf("\n>>Ingrese su matricula: ");
 	scanf("%d", &openmat);
 	printf("\n>>Ingrese su contraseña: ");
 	_flushall();
@@ -1585,10 +1584,13 @@ void evolucionmascota(turnos turnos_ok,FILE *turnosok,FILE*altaveterinarios, Usu
 	system("cls");
 	fclose(altaveterinarios);	 
 	
-	
+	//======================================================== YA DENTRO ==============
 	turnosok=fopen("Turnos.dat","r+b");
 	altaveterinarios=fopen("Mascotas.dat","r+b");
-	
+	bool encontrado;
+	encontrado=false;
+	FILE *ArchTemp;
+	ArchTemp = fopen("Turnosaux.dat","w+b"); //Se crea un archivo de respaldo.
 	rewind(turnosok);
 	fread(&turnos_ok,sizeof(turnos_ok),1,turnosok);
     
@@ -1597,25 +1599,25 @@ void evolucionmascota(turnos turnos_ok,FILE *turnosok,FILE*altaveterinarios, Usu
 		if(openmat==turnos_ok.Matriculavet)
 		{
 			printf("\nLa matricula esta\n");
-			
 			rewind(altaveterinarios);
 			fread(&masc,sizeof(masc),1,altaveterinarios);
 					    
 				while (!feof(altaveterinarios))
-					{	
-							
-						
+					{						
 							compara=strcmp(turnos_ok.apenom,masc.apenom);
 							printf("\n aux: %s,masc.apenom: %s\n",turnos_ok.apenom,masc.apenom);
-							
+							if(compara==1)
+							{
+								fwrite(&turnos_ok, sizeof(turnos_ok), 1, ArchTemp); //archivo temporal el registro leído
+							}
 							
 							if (compara==0)
 							{
 								printf("\n--Mascota: %s",turnos_ok.apenom);
 								printf("\n--Dia: %d",turnos_ok.fechaturno.dia);
 								printf("\n--Mes: %d",turnos_ok.fechaturno.mes);
-								printf("\n--Anio: %d",turnos_ok.fechaturno.year);
-								printf("\n\nEste fue el turno de la atencion? \n 1: Si\n 2: No\n ");
+								printf("\n--Año: %d",turnos_ok.fechaturno.year);
+								printf("\n\nEste fue el turno de la atencion? \n 1: Si\n 2: No\n opcion: ");
 								scanf("%d", &continuar);
 								system("cls");								
 								
@@ -1624,29 +1626,29 @@ void evolucionmascota(turnos turnos_ok,FILE *turnosok,FILE*altaveterinarios, Usu
 									printf("\n\n>>Ingrese la evolucion de la mascota: ");
 									_flushall();
 									gets(masc.evolucion);
-									
-									turnos_ok.fechaturno.dia==NULL;
-									turnos_ok.fechaturno.mes==NULL;
-									turnos_ok.fechaturno.year==NULL;
-								/*	fseek(turnosok,- sizeof(turnos_ok),SEEK_CUR);*/
-									fwrite(&turnos_ok,sizeof(turnos_ok),1,turnosok);									
-									
-								/*	fseek(altaveterinarios,- sizeof(masc),SEEK_CUR);*/
 									fwrite(&masc,sizeof(masc),1,altaveterinarios);
-									
+									encontrado=true;
+									if(encontrado==true)
+									{
+										fclose(ArchTemp);
+										fclose(turnosok);
+										remove("Turnos.dat");
+										rename("Turnosaux.dat","Turnos.dat");
+										printf("\n\nSe ha eliminado el turno");
+										turnosok=fopen("Turnos.dat","r+b");
+										ArchTemp = fopen("Turnosaux.dat","w+b");
+									}
 								}
+									
 							}
 							
 							fread(&masc,sizeof(masc),1,altaveterinarios);
 					}   	
 		}
 		fread(&turnos_ok,sizeof(turnos_ok),1,turnosok);
-	};
+	}
 	
 	fclose(altaveterinarios);
 	fclose(turnosok);
 	
 }
-
-
-

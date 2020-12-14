@@ -384,8 +384,9 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav,info 
 	altaveterinarios=fopen("Usuario.dat","rb");
 	
 	system("cls");
-	printf("\n=====Iniciar sesión=====");	
-	printf("\n>>Ingrese su usuario: ");
+	printf("\n=====Iniciar sesión=====");
+	printf("\nPara regresar enter dos veces");
+	printf("\n\n>>Ingrese su usuario: ");
 	_flushall();
 	gets(usuario);
 	
@@ -430,31 +431,31 @@ printf("\n**********************************************************************
 printf("\n**********************************************************************");
 printf("\n**                                                                  **");
 printf("\n**                                                                  **");	
-printf("\n**                  Módulo Administración                           **");
-printf("\n**                =========================                         **");
-printf("\n**                1> Registrar Veterinario                          **");
-printf("\n**                2> Registrar Usuario Asistente                    **");
-printf("\n**                3> Atenciones por Veterinarios                    **");
-printf("\n**                4> Ranking de Veterinarios por Atenciones         **");
-printf("\n**                5> Volver al menu anterior                        **");
-printf("\n**                                                                  **");
-printf("\n**                                                                  **");
-printf("\n**                                                                  **");
-printf("\n**                                                                  **");
-printf("\n**                                                                  **");
-printf("\n**                                                                  **");
-printf("\n**                                                                  **");
-printf("\n**                                                                  **");
-printf("\n**                                                                  **");
-printf("\n**                                                                  **");
-printf("\n**                                                                  **");
-printf("\n**                                                                  **");
-printf("\n**                                                                  **");
-printf("\n**                                                                  **");
-printf("\n**                                                                  **");
-printf("\n**                                                                  **");               
-printf("\n**********************************************************************");    
-printf("\n**********************************************************************");	
+printf("\n**                    Módulo Administración                         **");
+printf("\n**                  =========================                       **");
+printf("\n**                  1> Registrar Veterinario                        **");
+printf("\n**                  2> Registrar Usuario Asistente                  **");
+printf("\n**                  3> Atenciones por Veterinarios                  **");
+printf("\n**                  4> Ranking de Veterinarios por Atenciones       **");
+printf("\n**                  5> Volver al menu anterior                      **");
+printf("\n**                                                                  **"); 
+printf("\n**                                @@@@                              **");   
+printf("\n**                             @@@@@@@@@                            **");   
+printf("\n**                           @@@@@@@@@@@@@@@                        **");    
+printf("\n**                       @@@@@@@@@@@@@@@@@@@@@                      **");   
+printf("\n**                    @@@@@@@@@@@@@@@@@@@@@@@@@@@                   **");   
+printf("\n**                 @@@@@@@@@@@@   @@@   @@@@@@@@@@@                 **");  
+printf("\n**               @@@@@@@@@@@@@     @     @@@@@@@@@@@@@              **");   
+printf("\n**            @@@@@@@@@@@@   @@   @@@  @@@   @@@@@@@@@@@@           **");   
+printf("\n**         @@@@@@@@@@@@@@@    @@@@   @@@@    @@@@@@@@@@@@@@@        **");   
+printf("\n**      @@@@@@@@@@@@@@@@@@@@ @@@       @@@ @@@@@@@@@@@@@@@@@@@@     **");   
+printf("\n**    @@@@@@@@@@@@@@@@@@@@@@@@           @@@@@@@@@@@@@@@@@@@@@@@@   **");   
+printf("\n**          @@@@@@@@@@@@@@@                 @@@@@@@@@@@@@@          **");  
+printf("\n**          @@@@@@@@@@@@@@@@               @@@@@@@@@@@@@@@          **");  
+printf("\n**          @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@          **");   
+printf("\n**          @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@          **");        
+printf("\n**          @@@@@@@@@@@                         @@@@@@@@@@          **");  
+printf("\n************@@@@@@@@@@@*************************@@@@@@@@@@************");
 printf("\n Ingrese una opción: ");
 scanf("%d", &opcion);
 			 switch(opcion)
@@ -1087,8 +1088,9 @@ void recepcionista(Mascota masc, FILE*altaveterinarios,Usuarios admi,turnos turn
 	return;
 	}
 	system("cls");
-	printf("\n=====Iniciar sesión=====");	
-	printf("\n>>Ingrese su usuario: ");
+	printf("\n=====Iniciar sesión=====");
+	printf("\nPara regresar enter dos veces");	
+	printf("\n\n>>Ingrese su usuario: ");
 	_flushall();
 	gets(usuario);
 	
@@ -1585,6 +1587,7 @@ void atencionvet(Mascota masc, FILE*altaveterinarios,Usuarios admi,FILE *turnoso
 	
 	system("cls");
 	printf("=====Iniciar sesión=====");
+	printf("\nPara regresar enter dos veces");
 	printf("\n>>Ingrese su usuario: ");
 	_flushall();
 	gets(usuario);

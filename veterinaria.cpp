@@ -94,17 +94,28 @@ struct turnos
 	
 };
 
-void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav);
+struct info
+{
+	int matricula;
+	char apenomM[60];
+	char evolucion[380];
+	fechaT fechaturno;
+	
+};
 
-void recepcionista(Mascota masc, FILE*altaveterinarios,Usuarios admi,turnos turnos_ok,FILE *turnosok);
+
+void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav);
+void regvet(FILE*altaveterinarios,Usuarios admi);
 void regrecepcionista(FILE*altaveterinarios,Usuarios admi);
+
+void recepcionista(Mascota masc, FILE*altaveterinarios,Usuarios admi,turnos turnos_ok,FILE *turnosok,info infor,FILE *informes);
 void regmascota(Mascota masc, FILE*altaveterinarios);
 void registrarturno(Mascota masc, FILE*altaveterinarios,turnos turnos_ok,FILE *turnosok,Usuarios admi);
+void listadovet(turnos turnos_ok,FILE *turnosok,FILE*altaveterinarios, Usuarios admi,Mascota masc,info infor,FILE *informes);
 
-void atencionvet(Mascota masc, FILE*altaveterinarios,Usuarios admi,FILE *turnosok,turnos turnos_ok);
-void regvet(FILE*altaveterinarios,Usuarios admi);
+void atencionvet(Mascota masc, FILE*altaveterinarios,Usuarios admi,FILE *turnosok,turnos turnos_ok,	info infor,FILE *informes);
 void espera_mascota(turnos turnos_ok,FILE *turnosok,FILE*altaveterinarios, Usuarios admi);
-void evolucionmascota(turnos turnos_ok,FILE *turnosok,FILE*altaveterinarios, Usuarios admi,Mascota masc);
+void evolucionmascota(turnos turnos_ok,FILE *turnosok,FILE*altaveterinarios, Usuarios admi,Mascota masc,info infor,FILE *informes);
  
 //============================================================PRINCIPAL============================================================
 using namespace std;
@@ -112,16 +123,17 @@ main()
 {
 	int opcion	;
 	Usuarios admi;
+	info infor;
 	Mascota masc;
 	veterinarios altav;
 	turnos turnos_ok;
 	FILE *altaveterinarios;
 	FILE *turnosok;
+	FILE *informes;
 
 	do
 	{
 system("cls");
-printf("\n**********************************************************************");	
 printf("\n**********************************************************************");	
 printf("\n**                                                                  **");
 printf("\n**                                                                  **");
@@ -159,12 +171,12 @@ scanf("%d", &opcion);
 	 	system("pause");
 	 	break;
 	 	
-	 	case 2: recepcionista(masc,altaveterinarios,admi,turnos_ok,turnosok);
+	 	case 2: recepcionista(masc,altaveterinarios,admi,turnos_ok,turnosok,infor,informes);
 	 	
 	 	system("pause");
 	 	break;
 	 	
-	 	case 3: atencionvet(masc,altaveterinarios,admi,turnosok,turnos_ok);
+	 	case 3: atencionvet(masc,altaveterinarios,admi,turnosok,turnos_ok,infor,informes);
 
 	 	system("pause");
 	 	break;
@@ -930,7 +942,7 @@ void regrecepcionista(FILE*altaveterinarios,Usuarios admi)
 
 
 //============================================================RECEPCION============================================================
-void recepcionista(Mascota masc, FILE*altaveterinarios,Usuarios admi,turnos turnos_ok,FILE *turnosok)
+void recepcionista(Mascota masc, FILE*altaveterinarios,Usuarios admi,turnos turnos_ok,FILE *turnosok,info infor,FILE *informes)
 {
 	int opcion,compara,compara2;
 	bool login=false;
@@ -1027,7 +1039,7 @@ scanf("%d", &opcion);
 		 		system("pause");
 		 	break;
 		 	
-		 	case 3: //atencionvet();
+		 	case 3: listadovet(turnos_ok,turnosok,altaveterinarios,admi,masc,infor,informes);
 		 
 		 	system("pause");
 		 	break;
@@ -1340,9 +1352,48 @@ fwrite(&turnos_ok,sizeof(turnos_ok),1,turnosok);
  fclose(turnosok);
 }
 
+void listadovet(turnos turnos_ok,FILE *turnosok,FILE*altaveterinarios, Usuarios admi,Mascota masc,info infor,FILE *informes)
+{
+	int openmat,dia,mes,year;
+	
+	informes=fopen("informacion.dat","rb");
+	
+	printf("Ingresa matricula del veterinario: ");
+	scanf("%d", &openmat);
+	
+	printf("\n Ingrese el dia: ");
+	scanf("%d", &dia);
+	printf("\n Ingrese el mes: ");
+	scanf("%d", &mes);
+	printf("\n Ingrese el año: ");
+	scanf("%d", &year);
+	
+	rewind(informes);
+	fread(&infor,sizeof(infor),1,informes);
+	
+  	while (!feof(altaveterinarios))
+	{
+		
+		if(openmat==infor.matricula)
+		{
+			if(dia==infor.fechaturno.dia && mes==infor.fechaturno.mes && year==infor.fechaturno.year)
+			{
+				printf("\n dia: %d", infor.fechaturno.dia);
+				printf("\n mes: %d", infor.fechaturno.mes);
+				printf("\n año: %d", infor.fechaturno.year);
+				
+				printf("\n\n%s", infor.evolucion);
+			}
+		}
+		
+	   fread(&infor,sizeof(infor),1,informes);
+	}
+	
+	
+}
 
 //============================================================VETERINARIO==========================================================
-void atencionvet(Mascota masc, FILE*altaveterinarios,Usuarios admi,FILE *turnosok,turnos turnos_ok)
+void atencionvet(Mascota masc, FILE*altaveterinarios,Usuarios admi,FILE *turnosok,turnos turnos_ok,	info infor,FILE *informes)
 {
 	int opcion,compara,compara2;
 	bool login=false;
@@ -1435,7 +1486,7 @@ scanf("%d",&opcion);
 		 	system("pause");
 		 	break;
 		 	
-		 	case 2: evolucionmascota(turnos_ok,turnosok,altaveterinarios,admi,masc);
+		 	case 2: evolucionmascota(turnos_ok,turnosok,altaveterinarios,admi,masc,infor,informes);
 		 	
 		 		system("pause");
 		 	break;
@@ -1537,11 +1588,11 @@ void espera_mascota(turnos turnos_ok,FILE *turnosok,FILE*altaveterinarios, Usuar
 	
 }
 
-void evolucionmascota(turnos turnos_ok,FILE *turnosok,FILE*altaveterinarios, Usuarios admi,Mascota masc)
+void evolucionmascota(turnos turnos_ok,FILE *turnosok,FILE*altaveterinarios, Usuarios admi,Mascota masc,info infor,FILE *informes)
 {
-	int openmat,compara=1,continuar;
+	int openmat,compara=1,continuar,longitud,longitud2,dia,mes,year;
 	bool acceso=false;
-	char contra[10];
+	char contra[10],mascota[60];
 	
 	altaveterinarios=fopen("Veterinarios.dat","rb");
 	
@@ -1591,6 +1642,7 @@ void evolucionmascota(turnos turnos_ok,FILE *turnosok,FILE*altaveterinarios, Usu
 	encontrado=false;
 	FILE *ArchTemp;
 	ArchTemp = fopen("Turnosaux.dat","w+b"); //Se crea un archivo de respaldo.
+	
 	rewind(turnosok);
 	fread(&turnos_ok,sizeof(turnos_ok),1,turnosok);
     
@@ -1599,6 +1651,8 @@ void evolucionmascota(turnos turnos_ok,FILE *turnosok,FILE*altaveterinarios, Usu
 		if(openmat==turnos_ok.Matriculavet)
 		{
 			printf("\nLa matricula esta\n");
+			
+			
 			rewind(altaveterinarios);
 			fread(&masc,sizeof(masc),1,altaveterinarios);
 					    
@@ -1606,38 +1660,39 @@ void evolucionmascota(turnos turnos_ok,FILE *turnosok,FILE*altaveterinarios, Usu
 					{						
 							compara=strcmp(turnos_ok.apenom,masc.apenom);
 							printf("\n aux: %s,masc.apenom: %s\n",turnos_ok.apenom,masc.apenom);
-							if(compara==1)
-							{
-								fwrite(&turnos_ok, sizeof(turnos_ok), 1, ArchTemp); //archivo temporal el registro leído
-							}
+							
 							
 							if (compara==0)
 							{
-								printf("\n--Mascota: %s",turnos_ok.apenom);
+								
+								printf("\n--Mascota: %s",turnos_ok.apenom);	
 								printf("\n--Dia: %d",turnos_ok.fechaturno.dia);
 								printf("\n--Mes: %d",turnos_ok.fechaturno.mes);
 								printf("\n--Año: %d",turnos_ok.fechaturno.year);
-								printf("\n\nEste fue el turno de la atencion? \n 1: Si\n 2: No\n opcion: ");
+								
+								printf("\n\nEste fue el turno de la atencion? \n 1: Si\n 2: No\nopcion: ");
 								scanf("%d", &continuar);
 								system("cls");								
 								
 								if(continuar==1)
 								{
+									longitud = strlen(turnos_ok.apenom);
+									for(int i=0;i<=longitud;i++)
+									{
+										mascota[i]=turnos_ok.apenom[i];
+									}
+										dia=turnos_ok.fechaturno.dia;
+										mes=turnos_ok.fechaturno.mes;
+										year=turnos_ok.fechaturno.year;
 									printf("\n\n>>Ingrese la evolucion de la mascota: ");
 									_flushall();
 									gets(masc.evolucion);
+									
+									fseek(altaveterinarios,- sizeof(masc),SEEK_CUR);
 									fwrite(&masc,sizeof(masc),1,altaveterinarios);
-									encontrado=true;
-									if(encontrado==true)
-									{
-										fclose(ArchTemp);
-										fclose(turnosok);
-										remove("Turnos.dat");
-										rename("Turnosaux.dat","Turnos.dat");
-										printf("\n\nSe ha eliminado el turno");
-										turnosok=fopen("Turnos.dat","r+b");
-										ArchTemp = fopen("Turnosaux.dat","w+b");
-									}
+									
+									break;
+								
 								}
 									
 							}
@@ -1648,7 +1703,64 @@ void evolucionmascota(turnos turnos_ok,FILE *turnosok,FILE*altaveterinarios, Usu
 		fread(&turnos_ok,sizeof(turnos_ok),1,turnosok);
 	}
 	
+	informes = fopen("informacion.dat","a+b"); 
+	
+	infor.matricula=openmat;
+		for(int i=0;i<=longitud;i++)
+			{
+				infor.apenomM[i]=turnos_ok.apenom[i];
+			}
+			
+	longitud2 = strlen(masc.evolucion);
+	for(int i=0;i<=longitud;i++)
+	{
+	infor.evolucion[i]=masc.evolucion[i];
+	}
+	infor.fechaturno.dia=turnos_ok.fechaturno.dia;
+	infor.fechaturno.mes=turnos_ok.fechaturno.mes;
+	infor.fechaturno.year=turnos_ok.fechaturno.year;
+	
+	fwrite(&infor,sizeof(infor),1,informes);
+	fclose(informes);
+	
+	
+	rewind(turnosok);
+	fread(&turnos_ok,sizeof(turnos_ok),1,turnosok);
+	
+	while(!feof(turnosok))
+	{
+		compara=strcmp(turnos_ok.apenom,mascota);
+	
+		if(dia==turnos_ok.fechaturno.dia && mes==turnos_ok.fechaturno.mes && year==turnos_ok.fechaturno.year && compara==0)
+		{}
+		else
+		{
+				fwrite(&turnos_ok, sizeof(turnos_ok), 1, ArchTemp); //archivo temporal el registro leído
+		}
+									
+		fread(&turnos_ok,sizeof(turnos_ok),1,turnosok);
+	}
+	
+										fclose(ArchTemp);
+										fclose(turnosok);
+										remove("Turnos.dat");
+										rename("Turnosaux.dat","Turnos.dat");
+										printf("\n\nSe ha eliminado el turno");
+										/*turnosok=fopen("Turnos.dat","r+b");
+										ArchTemp = fopen("Turnosaux.dat","w+b");*/
+										
+	
 	fclose(altaveterinarios);
 	fclose(turnosok);
 	
 }
+
+/*struct info
+{
+	int matricula;
+	char apenomM[60];
+	char evolucion[380];
+	fechaT fechaturno;
+	
+}*/
+

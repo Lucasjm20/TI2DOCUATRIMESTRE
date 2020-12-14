@@ -11,31 +11,9 @@
 	*borrar al empleado del sistema
 	*Dar de alta a masocta ya curada
 	*Se otorga un bono al veterinario que mas turnos haya atendido
-			
-modulo recepcion:
-	*Se hace el ingreso de las mascotas, datos necesarios:Apellido y Nombres de la mascota (el
-apellido corresponde al dueño o familia), DNI del dueño, Localidad, Edad (calculada con la fecha de nacimiento
-registrada), Peso.
-	* Debemos permitir obtener el informe de la historia clinica de la mascot
-	
-modulo consultorio:
-	el vetereniario ingresa con su numero de matricula y contraseña 
-	se habre un menu de opciones:
-		1. llama por apellido y nombre a la mascota que atendera 
-		 *poner estado evolucion de la mascota maximo 380
-		 * (historia clinica, comun a todos)
-		  se debe dejar registro del veterinario que escribio el estado de evolucion junto a la fecha
-	   	*se borra la mascota del listado
-		   */
+
  /*Bueno yo creo que nos falta esto lo digo por pasos
-Módulo recepción 
-Ingresar a la mascota *
-Darle un turno a la mascota *
-Módulo consultorio
-Poder visualizar los turnos según el día (necesita ingresar matricular para verlo) *
-Dar la evolución de la mascota y borrar el turno  
-Módulo recepción 
-Podés visualizar las atenciones por fecha y veterinario
+
 Módulo administración
 Visualizar las atenciones dadas en el mes 
 Dar bono mensual*/

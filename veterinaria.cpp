@@ -158,7 +158,7 @@ main()
 		
 }
 
-//============================================================ADMINISTRACION============================================================	
+//============================================================ADMINISTRACION=======================================================	
 void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav)
 {	
 	char usuario[10], contra[10],aux[10],auxcontra[10];
@@ -912,15 +912,7 @@ else
 	fclose(altaveterinarios);
 	
 }
-/*struct Mascota
-{
-	char apenom[60];
-	char domicilio[60];
-	int Dni_due;
-	char localidad[100];
-	fechaN FechaNac;
-	char telefono[25];
-};*/
+
 void regmascota(Mascota masc, FILE*altaveterinarios)
 {
 	int aux2,compara,c,longitud;
@@ -1198,7 +1190,9 @@ fwrite(&turnos_ok,sizeof(turnos_ok),1,turnosok);
  fclose(altaveterinarios);
  fclose(turnosok);
 }
-//============================================================VETERINARIO============================================================
+
+
+//============================================================VETERINARIO==========================================================
 void atencionvet(Mascota masc, FILE*altaveterinarios,Usuarios admi,FILE *turnosok,turnos turnos_ok)
 {
 	int opcion,compara,compara2;
@@ -1435,19 +1429,23 @@ void evolucionmascota(turnos turnos_ok,FILE *turnosok,FILE*altaveterinarios, Usu
 								printf("\n Anio: %d",turnos_ok.fechaturno.year);
 								printf("\n Este fue el turno de la atencion? \n 1: Si\n 2: No\n ");
 								scanf("%d", &continuar);
+								system("cls");								
 								
 								if(continuar==1)
 								{
-									printf("\n Ingrese la evolucion de la mascota");
+									printf("\n Ingrese la evolucion de la mascota: ");
 									_flushall();
 									gets(masc.evolucion);
 									
 									turnos_ok.fechaturno.dia==NULL;
 									turnos_ok.fechaturno.mes==NULL;
 									turnos_ok.fechaturno.year==NULL;
+								/*	fseek(turnosok,- sizeof(turnos_ok),SEEK_CUR);*/
+									fwrite(&turnos_ok,sizeof(turnos_ok),1,turnosok);									
 									
+								/*	fseek(altaveterinarios,- sizeof(masc),SEEK_CUR);*/
 									fwrite(&masc,sizeof(masc),1,altaveterinarios);
-									fwrite(&turnos_ok,sizeof(turnos_ok),1,turnosok);
+									
 								}
 							}
 							
@@ -1463,11 +1461,4 @@ void evolucionmascota(turnos turnos_ok,FILE *turnosok,FILE*altaveterinarios, Usu
 }
 
 
-/*printf("\nDia: %d",turnos_ok.fechaturno.dia);
-			printf("\nMes: %d",turnos_ok.fechaturno.mes);
-			printf("\nAnio: %d",turnos_ok.fechaturno.year);
-			printf("\n=======================\n");
-			printf("Ingrese la evolucion de la mascota: ");
-			_flushall()
-			gets(turnos_ok.evolucion)
-			fwrite(&turnos_ok,sizeof(turnos_ok),1,turnosok);*/
+

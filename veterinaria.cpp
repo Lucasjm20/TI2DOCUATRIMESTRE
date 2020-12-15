@@ -4,19 +4,6 @@
 #include<string.h>
 #include<ctype.h>
 #include <iostream>
-
-/*Modulo de Administracion: 
-	*Alta veterinario sistema
-	*Borrar al veterinario del sistema, junto a sus datos
-	*borrar al empleado del sistema
-	*Dar de alta a masocta ya curada
-	*Se otorga un bono al veterinario que mas turnos haya atendido
-
- /*Bueno yo creo que nos falta esto lo digo por pasos
-
-Módulo administración
-Visualizar las atenciones dadas en el mes 
-Dar bono mensual*/
 		   
 ////============================================================FUNCIONES Y ESTRUCTURAS============================================================
 
@@ -26,8 +13,6 @@ struct Usuarios
 	char contra[10];
 	char Apenom[60];
 	int matricula;
-	//bool borrado=false; // siempre vamos a agregar el campo borrado porque a este campo lo vamos a utilizar para hacer borrados logicos
-    			            // el borrado logico es como cuando se borra un archivo y se va la papelera, el borrado fisico es cuando ya se borra lo que hay en la papelera xd
 };
 
 struct fechaN
@@ -89,9 +74,10 @@ struct ranking
 		
 };
 
-void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav,info infor,FILE *informes,ranking auxmes);
+void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav,info infor,FILE *informes,ranking auxmes,turnos turnos_ok,Mascota masc,FILE *turnosok);
 void regvet(FILE*altaveterinarios,Usuarios admi);
 void regrecepcionista(FILE*altaveterinarios,Usuarios admi);
+void listado(turnos turnos_ok,FILE *turnosok,FILE*altaveterinarios, Usuarios admi,Mascota masc,info infor,FILE *informes);
 void mejorveterinario(info infor,FILE *informes,FILE*altaveterinarios,Usuarios admi,ranking auxmes);
 
 void recepcionista(Mascota masc, FILE*altaveterinarios,Usuarios admi,turnos turnos_ok,FILE *turnosok,info infor,FILE *informes);
@@ -157,7 +143,7 @@ scanf("%d", &opcion);
 	
  	switch(opcion)
 	 {
-	 	case 1: administracion(admi,altaveterinarios,altav,infor,informes,auxmes);
+	 	case 1: administracion(admi,altaveterinarios,altav,infor,informes,auxmes,turnos_ok,masc,turnosok);
 	 	
 	 	system("pause");
 	 	break;
@@ -206,7 +192,8 @@ system("pause");
 }
 
 //============================================================ADMINISTRACION=======================================================	
-void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav,info infor,FILE *informes,ranking auxmes)
+
+void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav,info infor,FILE *informes,ranking auxmes,turnos turnos_ok,Mascota masc,FILE *turnosok)
 {	
 	char usuario[10], contra[10],aux[10],auxcontra[10];
 	bool login=false,error=false,contrase=false;
@@ -482,13 +469,11 @@ scanf("%d", &opcion);
 			 	system("pause");
 			 	break;
 			 	
-			 	case 3: //atencionvet();
-			 	printf("3.- Atenciones por Veterinarios\n");
+			 	case 3: listado(turnos_ok,turnosok,altaveterinarios,admi,masc,infor,informes);
 			 	system("pause");
 			 	break;
 			 	
-			 	case 4: 
-				mejorveterinario(infor,informes,altaveterinarios,admi,auxmes);
+			 	case 4: mejorveterinario(infor,informes,altaveterinarios,admi,auxmes);
 			 	system("pause");
 			 	break;
 			 	
@@ -727,7 +712,6 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
 	
 }
 
-
 void regrecepcionista(FILE*altaveterinarios,Usuarios admi)
 {
 	int longitud,repite;
@@ -934,6 +918,57 @@ void regrecepcionista(FILE*altaveterinarios,Usuarios admi)
 	
 }
 
+void listado(turnos turnos_ok,FILE *turnosok,FILE*altaveterinarios, Usuarios admi,Mascota masc,info infor,FILE *informes)
+{
+	int openmat,dia,mes,year;
+	
+	informes=fopen("informacion.dat","rb");
+	system("cls");
+	printf("\n");
+	printf("\n************************************************************************");
+	printf("\n**                      LISTADO   DE   ATENCIONES                     **");
+	printf("\n************************************************************************");
+	printf("\n\n");
+	printf("\n>>Ingresa matricula del veterinario: ");
+	scanf("%d", &openmat);
+	
+        
+        do
+        {
+        printf("\n>>Ingrese el mes (1 al 12): ");
+        scanf("%d",&mes);
+        }while(mes<1 || mes>12);
+        
+        do
+        {
+        printf("\n>>Ingrese el año (ultimos dos digitos): ");
+        scanf("%d",&year);
+		}while(year<20);
+ 	
+	rewind(informes);
+	fread(&infor,sizeof(infor),1,informes);
+	
+  	while (!feof(informes))
+	{
+		
+		if(openmat==infor.matricula)
+		{
+			if(mes==infor.fechaturno.mes && year==infor.fechaturno.year)
+			{
+				printf("\nNombre: %s",infor.apenomM);
+				printf("\n dia: %d", infor.fechaturno.dia);
+				printf("\n mes: %d", infor.fechaturno.mes);
+				printf("\n año: %d", infor.fechaturno.year);
+				printf("\n%s\n", infor.evolucion);
+			}
+		}
+		
+	   fread(&infor,sizeof(infor),1,informes);
+	}
+	
+	
+}
+
 void mejorveterinario(info infor,FILE *informes,FILE*altaveterinarios,Usuarios admi,ranking auxmes)
 {
 	int year,mes,longitud;
@@ -942,12 +977,19 @@ void mejorveterinario(info infor,FILE *informes,FILE*altaveterinarios,Usuarios a
 	mejordelmes=fopen("Auxmes.dat","w+b");
 	informes=fopen("informacion.dat","rb");
 	int aux;
-
-
-	printf("\n>>Ingrese el año: ");
-	scanf("%d",&year);
+	
+	system("cls");
+	printf("\n");
+	printf("\n************************************************************************");
+	printf("\n**                    MEJOR VETERINARIO DEL MES                       **");
+	printf("\n************************************************************************");
+	printf("\n\n");
+	
 	printf("\n>>Ingrese el mes: ");
 	scanf("%d",&mes);
+	printf("\n>>Ingrese el año: ");
+	scanf("%d",&year);
+
 	
 	rewind(altaveterinarios);
 	fread(&admi,sizeof(admi),1,altaveterinarios);
@@ -1011,9 +1053,12 @@ void mejorveterinario(info infor,FILE *informes,FILE*altaveterinarios,Usuarios a
   	while(!feof(mejordelmes))
   	{
   		if(aux==auxmes.n)
-  		{
+  		{	
+		    
   			printf("\n>> El nombre del veterinario con más atenciones ---> %s",auxmes.apenom);
-  			printf("\n>> Su matricula es ---> %s",auxmes.matricula);
+			printf("\n>> Su matricula es ---> %d",auxmes.matricula);
+  			printf("\n>> Cantidad de turnos atendidos ---> %d\n",auxmes.n);
+  			
   			
 		}
 	  
@@ -1325,7 +1370,7 @@ printf("\n--Ingrese fecha del turno: ");
         {
         printf("\n>>Año (ultimos dos digitos): ");
         scanf("%d",&turnos_ok.fechaturno.year);
-		}while(turnos_ok.fechaturno.year!=20);
+		}while(turnos_ok.fechaturno.year<20);
         year=turnos_ok.fechaturno.year;
         
 	rewind(turnosok);
@@ -1494,7 +1539,7 @@ void listadovet(turnos turnos_ok,FILE *turnosok,FILE*altaveterinarios, Usuarios 
         {
         printf("\n>>Ingrese el año (ultimos dos digitos): ");
         scanf("%d",&year);
-		}while(year!=20);
+		}while(year<20);
  	
 	rewind(informes);
 	fread(&infor,sizeof(infor),1,informes);

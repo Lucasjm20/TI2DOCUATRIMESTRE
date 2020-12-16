@@ -454,8 +454,9 @@ printf("\n**          @@@@@@@@@@@@@@@                 @@@@@@@@@@@@@@          **
 printf("\n**          @@@@@@@@@@@@@@@@               @@@@@@@@@@@@@@@          **");  
 printf("\n**          @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@          **");   
 printf("\n**          @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@          **");        
-printf("\n**          @@@@@@@@@@@                         @@@@@@@@@@          **");  
-printf("\n************@@@@@@@@@@@*************************@@@@@@@@@@************");
+printf("\n**          @@@@@@@@@@@                         @@@@@@@@@@          **");
+printf("\n**                                                                  **");   
+printf("\n**********************************************************************");
 printf("\n Ingrese una opción: ");
 scanf("%d", &opcion);
 			 switch(opcion)
@@ -1085,6 +1086,7 @@ void recepcionista(Mascota masc, FILE*altaveterinarios,Usuarios admi,turnos turn
 	printf("\n No hay recepcionistas registrados");
 	printf("\n------------ ATENCIÓN ------------");
 	printf("\n");
+	fclose(altaveterinarios);
 	return;
 	}
 	system("cls");

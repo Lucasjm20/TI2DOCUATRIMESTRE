@@ -194,7 +194,7 @@ system("pause");
 //============================================================ADMINISTRACION=======================================================	
 
 void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav,info infor,FILE *informes,ranking auxmes,turnos turnos_ok,Mascota masc,FILE *turnosok)
-{	
+{
 	char usuario[10], contra[10],aux[10],auxcontra[10];
 	bool login=false,error=false,contrase=false;
 	int opcion=0,compara=0,compara2=0,longitud=0;
@@ -1392,7 +1392,7 @@ printf("\n--Ingrese fecha del turno: ");
 	if(repiteturno>10)
 	{
 		printf("\n");
-		printf("ERROR  - No se puede registrar mas de 10 turnos por dia -  ERROR");
+		printf(" ERROR  - No se puede registrar mas de 10 turnos por dia -  ERROR");
 		printf("\n");
 		fclose(auxiliarvet);	
 	 	fclose(altaveterinarios);

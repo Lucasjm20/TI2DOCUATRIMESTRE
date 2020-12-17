@@ -177,11 +177,11 @@ printf("\n   @@@@@@@@    @@@@@@@   @@@@@@@@@       @@@@         @@@@   @@@@     
 printf("\n  @@@@@@@      @@@@@@@      @@@@@@@      @@@@         @@@@    @@@@      @@@@    ");
 printf("\n @@@@@@@       @@@@@@@       @@@@@@@     @@@@         @@@@     @@@@     @@@@    ");
 printf("\n\n                                PARTICIPANTES:");
-printf("\n                                -Navarro Jorge");
-printf("\n                                -Martinez Lucas");
-printf("\n                                -Olivares Clara");
 printf("\n                                -Lopez Camila");
-printf("\n                                -Abril Moreno\n\n\n");
+printf("\n                                -Martinez Lucas");
+printf("\n                                -Moreno Abril");
+printf("\n                                -Navarro Jorge");
+printf("\n                                -Olivares Clara\n\n\n");
 system("pause");
 	 	break;
 	 		

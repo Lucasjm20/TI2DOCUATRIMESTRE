@@ -1184,13 +1184,26 @@ void regmascota(Mascota masc, FILE*altaveterinarios)
 	
 	do
 	{
-	bool repite=false;
+	int c=0;
+	bool repite=false;	
+	
+	system("cls");
+	printf("\n>>Seguro que desea registrar una mascota?:\n 1: Si\n 2: No\n Opcion: ");
+	scanf("%d", &c);
+	if(c==2) 
+	{
+		fclose(altaveterinarios);
+		return;
+	}
 	system("cls");
 	printf("\n");
 	printf("\n************************************************************************");
 	printf("\n**                    REGISTRO DE LA MASCOTA                          **");
 	printf("\n************************************************************************");
 	printf("\n\n");
+	
+
+	
 	printf("\n>>Ingrese el nombre y apellido de la mascota (apellido de familia): ");
 	_flushall();
 	gets(masc.apenom);
@@ -1305,6 +1318,17 @@ if (altaveterinarios== NULL)
  	fclose(altaveterinarios);
  return;
 }
+
+int c=0;
+system("cls");
+printf("\n>>Seguro que desea registrar un turno?:\n 1: Si\n 2: No\n Opcion: ");
+scanf("%d", &c);
+	if(c==2) 
+	{
+		fclose(auxiliarvet);
+		fclose(altaveterinarios);
+		return;
+	}
 system("cls");
 printf("\n");
 printf("\n************************************************************************");

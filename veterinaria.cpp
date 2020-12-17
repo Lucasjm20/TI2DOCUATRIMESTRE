@@ -217,14 +217,10 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav,info 
 		printf("\n\n>>Ingrese su nuevo usuario: ");
 		_flushall();
 		gets(admi.usuario);
-		
-	//	printf("\n");
-	//	printf("--Ingreso: ");
-	//	puts(admi.usuario);
-		
+
 		
 		longitud = strlen(admi.usuario);
-	//	printf("\n--Tiene %d longitud",longitud);
+
 		
 		for(int i=0;i<=longitud;i++)
 		{
@@ -240,8 +236,7 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav,info 
 			i++;
      	}
      	
-     //	printf("\n--Tiene %d digitos y %d mayusculas",digito,mayus);
-	//	printf("\n--Primer caracter %c",aux[0]);
+   
 		
 			if((aux[0]>='a') && (aux[0]<='z') && (longitud>5) && (longitud<11) && (digito<4) && (mayus>1))
 				{
@@ -283,9 +278,7 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav,info 
 			printf ("\n\n>>Elija una contraseña: ");
 			_flushall();
 			gets(admi.contra);
-			
-		//	printf("\n--Lo ingresado fue:");
-		//	puts(admi.contra);
+	
 			longitudcontra = strlen(admi.contra);
 			for(int j=0;j<=longitudcontra;j++)
 			{
@@ -342,10 +335,6 @@ void administracion(Usuarios admi,FILE*altaveterinarios,veterinarios altav,info 
 				}	
 			 }	
 	
-	//	printf("\n--El numero digitos es %d, el numero de mayus es %d",digitcon,maycon);	
-	//	printf("\n--El numero minus es %d",mincon);	
-	//	printf("\n--El numero de caracteres especiales es %d",caracterespecial);
-	//	printf("\n--La longitud es %d",longitudcontra );
 		
 		if((consecutivo==false)&&(digitcon>0)&&(maycon>0)&&(mincon>0)&&(caracterespecial==0)&&(longitudcontra>5)&&(longitudcontra<11))
 		{contrase=true;}
@@ -525,14 +514,10 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
 		printf("\n\n>>Ingrese usuario del veterinario: ");
 		_flushall();
 		gets(admi.usuario);
-		
-	//	printf("\n");
-	//	printf("--Ingreso: ");
-	//	puts(admi.usuario);
-		
+
 		
 		longitud = strlen(admi.usuario);
-	//	printf("\n--Tiene %d longitud",longitud);
+
 		
 		for(int i=0;i<=longitud;i++)
 		{
@@ -548,8 +533,7 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
 			i++;
      	}
      	
-     //	printf("\n--Tiene %d digitos y %d mayusculas",digito,mayus);
-	//	printf("\n--Primer caracter %c",aux[0]);
+    
 		
 		rewind(altaveterinarios);
 		fread(&admi.usuario,sizeof(admi),1,altaveterinarios);
@@ -612,9 +596,7 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
 			printf ("\n\n>>Elija una contraseña: ");
 			_flushall();
 			gets(admi.contra);
-			
-	//		printf("\n-Lo ingresado fue:");
-	//		puts(admi.contra);
+	
 			longitudcontra = strlen(admi.contra);
 			for(int j=0;j<=longitudcontra;j++)
 			{
@@ -671,10 +653,6 @@ void regvet(FILE*altaveterinarios,Usuarios admi)
 				}	
 			 }	
 	
-	//	printf("\n--El numero digitos es %d, el numero de mayus es %d",digitcon,maycon);	
-	//	printf("\n--El numero minus es %d",mincon);	
-	//	printf("\n--El numero de caracteres especiales es %d",caracterespecial);
-	//	printf("\n--La longitud es %d",longitudcontra );
 		
 		if((consecutivo==false)&&(digitcon>0)&&(maycon>0)&&(mincon>0)&&(caracterespecial==0)&&(longitudcontra>5)&&(longitudcontra<11))
 		{contrase=true;}
@@ -734,13 +712,9 @@ void regrecepcionista(FILE*altaveterinarios,Usuarios admi)
 		_flushall();
 		gets(admi.usuario);
 		
-	//	printf("\n");
-	//	printf("--Ingreso: ");
-	//	puts(admi.usuario);
-		
+
 		
 		longitud = strlen(admi.usuario);
-	//	printf("\n--Tiene %d longitud",longitud);
 		
 		for(int i=0;i<=longitud;i++)
 		{
@@ -756,9 +730,7 @@ void regrecepcionista(FILE*altaveterinarios,Usuarios admi)
 			i++;
      	}
      	
-     //	printf("\n--Tiene %d digitos y %d mayusculas",digito,mayus);
-	//	printf("\n--Primer caracter %c",aux[0]);
-		
+
 		rewind(altaveterinarios);
 		fread(&admi,sizeof(char),1,altaveterinarios);
 		
@@ -823,8 +795,7 @@ void regrecepcionista(FILE*altaveterinarios,Usuarios admi)
 			_flushall();
 			gets(admi.contra);
 			
-	//		printf("\n--Lo ingresado fue: ");
-	//		puts(admi.contra);
+
 			longitudcontra = strlen(admi.contra);
 			for(int j=0;j<=longitudcontra;j++)
 			{
@@ -880,11 +851,7 @@ void regrecepcionista(FILE*altaveterinarios,Usuarios admi)
 					}
 				}	
 			 }	
-	
-	//	printf("\n--El numero digitos es %d, el numero de mayus es %d",digitcon,maycon);	
-	//	printf("\n--El numero minus es %d",mincon);	
-	//	printf("\n--El numero de caracteres especiales es %d",caracterespecial);
-	//	printf("\n--La longitud es %d",longitudcontra );
+
 		
 		if((consecutivo==false)&&(digitcon>0)&&(maycon>0)&&(mincon>0)&&(caracterespecial==0)&&(longitudcontra>5)&&(longitudcontra<11))
 		{contrase=true;}
@@ -1268,11 +1235,7 @@ void regmascota(Mascota masc, FILE*altaveterinarios)
 		
 	if(repite==false)
 	{
-		fwrite(&masc,sizeof(masc),1,altaveterinarios);
-	}
-	
-	if(repite!=true)
-	{
+		
 	printf("\n>>Domicilio del dueño: ");
 	_flushall();
 	gets(masc.domicilio);
@@ -1301,11 +1264,20 @@ void regmascota(Mascota masc, FILE*altaveterinarios)
         
     printf("\n>>Telefono del dueño: ");
 	_flushall();
-	gets(masc.telefono);	
+	gets(masc.telefono);
+	
+	        
+    printf("\n>>Escriba ""vacio"": ");
+	_flushall();
+	gets(masc.evolucion);
+	
+	
+	fwrite(&masc,sizeof(masc),1,altaveterinarios);
+		
 	}
 	
 	
-	printf("Quiere registrar otra mascota?\n 1: Si\n 2: No\n ");
+	printf("Quiere registrar otra mascota?\n 1: Si\n 2: No\n Opcion: ");
 	scanf("%d", &c);
 	
 	}while(c!=2);
@@ -1943,8 +1915,7 @@ void evolucionmascota(turnos turnos_ok,FILE *turnosok,FILE*altaveterinarios, Usu
 			remove("Turnos.dat");
 			rename("Turnosaux.dat","Turnos.dat");
 			printf("\n\nSe ha eliminado el turno\n\n");
-										/*turnosok=fopen("Turnos.dat","r+b");
-										ArchTemp = fopen("Turnosaux.dat","w+b");*/
+									
 	}
 	else
 	{

@@ -1267,10 +1267,7 @@ void regmascota(Mascota masc, FILE*altaveterinarios)
 	gets(masc.telefono);
 	
 	        
-    printf("\n>>Escriba ""vacio"": ");
-	_flushall();
-	gets(masc.evolucion);
-	
+    strcpy(masc.evolucion,"La mascota nunca fue atendida todavia");
 	
 	fwrite(&masc,sizeof(masc),1,altaveterinarios);
 		
@@ -1446,7 +1443,7 @@ strlwr(nombrem);
 	while (!feof(altaveterinarios))
 	{
 		compara=strcmp(nombrem,masc.apenom);
-		printf("\nAux: %s,masc.apenom: %s\n",nombrem,masc.apenom);
+	//	printf("\nAux: %s,masc.apenom: %s\n",nombrem,masc.apenom);
 	
 		if (compara==0 && masc.Dni_due==DNI)
 		{
@@ -1827,7 +1824,7 @@ void evolucionmascota(turnos turnos_ok,FILE *turnosok,FILE*altaveterinarios, Usu
 				while (!feof(altaveterinarios))
 					{						
 							compara=strcmp(turnos_ok.apenom,masc.apenom);
-							printf("\n aux: %s,masc.apenom: %s\n",turnos_ok.apenom,masc.apenom);
+						//	printf("\n aux: %s,masc.apenom: %s\n",turnos_ok.apenom,masc.apenom);
 							n++;
 							
 							if (compara==0)
